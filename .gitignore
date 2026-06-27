@@ -1,0 +1,11 @@
+# Local WordPress configuration and generated content.
+wp-config.php
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/cache/
+
+# Local/editor artifacts.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
