@@ -1,0 +1,24 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/mgrgffc/public_html/
+    - /bin/cp -R wp-admin "$DEPLOYPATH"
+    - /bin/cp -R wp-content "$DEPLOYPATH"
+    - /bin/cp -R wp-includes "$DEPLOYPATH"
+    - /bin/cp .htaccess "$DEPLOYPATH"
+    - /bin/cp index.php "$DEPLOYPATH"
+    - /bin/cp license.txt "$DEPLOYPATH"
+    - /bin/cp readme.html "$DEPLOYPATH"
+    - /bin/cp wp-activate.php "$DEPLOYPATH"
+    - /bin/cp wp-blog-header.php "$DEPLOYPATH"
+    - /bin/cp wp-comments-post.php "$DEPLOYPATH"
+    - /bin/cp wp-config-sample.php "$DEPLOYPATH"
+    - /bin/cp wp-cron.php "$DEPLOYPATH"
+    - /bin/cp wp-links-opml.php "$DEPLOYPATH"
+    - /bin/cp wp-load.php "$DEPLOYPATH"
+    - /bin/cp wp-login.php "$DEPLOYPATH"
+    - /bin/cp wp-mail.php "$DEPLOYPATH"
+    - /bin/cp wp-settings.php "$DEPLOYPATH"
+    - /bin/cp wp-signup.php "$DEPLOYPATH"
+    - /bin/cp wp-trackback.php "$DEPLOYPATH"
+    - /bin/cp xmlrpc.php "$DEPLOYPATH"
