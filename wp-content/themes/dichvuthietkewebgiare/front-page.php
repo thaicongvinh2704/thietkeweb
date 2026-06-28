@@ -133,16 +133,85 @@ get_header();
 		</div>
 		<div class="demo-grid">
 			<?php
-			$demos = array( 'Website Spa', 'Website Xây Dựng', 'Website Nha Khoa', 'Website Nội Thất', 'Website Nhà Hàng', 'Website Công Ty Dịch Vụ' );
-			foreach ( $demos as $demo ) :
+			$demos = array(
+				array(
+					'title' => 'Website Hộp Giấy VPN',
+					'desc'  => 'Mẫu tham khảo theo phong cách nhà máy hộp giấy, bao bì, carton, quà tặng và catalog sản phẩm B2B.',
+					'url'   => 'https://hopgiayvpn.com/',
+					'tag'   => 'Nguồn: hopgiayvpn.com',
+					'tone'  => 'packaging',
+				),
+				array(
+					'title' => 'Website Spa',
+					'desc'  => 'Phù hợp spa, thẩm mỹ viện, clinic nhỏ cần giới thiệu dịch vụ, bảng giá và đặt lịch nhanh.',
+					'url'   => home_url( '/lien-he/' ),
+					'tag'   => 'Làm đẹp',
+					'tone'  => 'spa',
+				),
+				array(
+					'title' => 'Website Xây Dựng',
+					'desc'  => 'Dành cho nhà thầu, đội thi công, công ty xây dựng cần hồ sơ năng lực và dự án đã làm.',
+					'url'   => home_url( '/lien-he/' ),
+					'tag'   => 'Công trình',
+					'tone'  => 'build',
+				),
+				array(
+					'title' => 'Website Nha Khoa',
+					'desc'  => 'Mẫu gọn cho phòng khám nha khoa với dịch vụ nổi bật, bác sĩ, feedback và nút tư vấn.',
+					'url'   => home_url( '/lien-he/' ),
+					'tag'   => 'Phòng khám',
+					'tone'  => 'dental',
+				),
+				array(
+					'title' => 'Website Nội Thất',
+					'desc'  => 'Tập trung hình ảnh dự án, phong cách thiết kế, quy trình thi công và form nhận báo giá.',
+					'url'   => home_url( '/lien-he/' ),
+					'tag'   => 'Showroom',
+					'tone'  => 'interior',
+				),
+				array(
+					'title' => 'Website Nhà Hàng',
+					'desc'  => 'Phù hợp quán ăn, nhà hàng, cà phê cần menu, hình món, đặt bàn và bản đồ chỉ đường.',
+					'url'   => home_url( '/lien-he/' ),
+					'tag'   => 'Ẩm thực',
+					'tone'  => 'food',
+				),
+				array(
+					'title' => 'Website Công Ty Dịch Vụ',
+					'desc'  => 'Mẫu doanh nghiệp nhỏ giới thiệu dịch vụ, quy trình, cam kết và kênh liên hệ rõ ràng.',
+					'url'   => home_url( '/lien-he/' ),
+					'tag'   => 'Dịch vụ',
+					'tone'  => 'service',
+				),
+				array(
+					'title' => 'Website Bất Động Sản',
+					'desc'  => 'Dùng cho môi giới hoặc dự án nhỏ cần đăng sản phẩm, vị trí, tiện ích và nhận khách quan tâm.',
+					'url'   => home_url( '/lien-he/' ),
+					'tag'   => 'Dự án',
+					'tone'  => 'realty',
+				),
+				array(
+					'title' => 'Website Giáo Dục',
+					'desc'  => 'Phù hợp trung tâm đào tạo, khóa học ngắn hạn, gia sư, tư vấn du học và tuyển sinh.',
+					'url'   => home_url( '/lien-he/' ),
+					'tag'   => 'Khóa học',
+					'tone'  => 'edu',
+				),
+			);
+			foreach ( $demos as $index => $demo ) :
 				?>
 				<article class="demo-card reveal">
-					<div class="demo-thumb" role="img" aria-label="<?php echo esc_attr( 'Ảnh placeholder mẫu ' . $demo ); ?>"><span></span><i></i></div>
+					<div class="demo-thumb demo-thumb-<?php echo esc_attr( $demo['tone'] ); ?>" role="img" aria-label="<?php echo esc_attr( 'Ảnh minh họa mẫu ' . $demo['title'] ); ?>">
+						<span></span>
+						<i></i>
+						<b><?php echo esc_html( str_pad( (string) ( $index + 1 ), 2, '0', STR_PAD_LEFT ) ); ?></b>
+						<em><?php echo esc_html( $demo['tag'] ); ?></em>
+					</div>
 					<div class="demo-body">
-						<h3><?php echo esc_html( $demo ); ?></h3>
-						<p><?php esc_html_e( 'Phù hợp doanh nghiệp nhỏ cần giao diện rõ ràng, dễ liên hệ.', 'dvtkwgr' ); ?></p>
+						<h3><?php echo esc_html( $demo['title'] ); ?></h3>
+						<p><?php echo esc_html( $demo['desc'] ); ?></p>
 						<div class="demo-actions">
-							<a href="#"><?php esc_html_e( 'Xem mẫu', 'dvtkwgr' ); ?></a>
+							<a href="<?php echo esc_url( $demo['url'] ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Xem mẫu', 'dvtkwgr' ); ?></a>
 							<a href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>"><?php esc_html_e( 'Chọn mẫu này', 'dvtkwgr' ); ?></a>
 						</div>
 					</div>

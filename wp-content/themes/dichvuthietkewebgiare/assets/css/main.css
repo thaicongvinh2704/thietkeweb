@@ -581,13 +581,14 @@ button.btn {
 	position: relative;
 	min-height: 180px;
 	background: linear-gradient(135deg, #dcecff, #f6fbff);
+	isolation: isolate;
 }
 
 .demo-thumb span {
 	position: absolute;
 	inset: 22px;
 	border-radius: var(--radius);
-	background: var(--white);
+	background: linear-gradient(180deg, var(--white) 0 45%, rgba(255, 255, 255, 0.78) 45% 100%);
 	box-shadow: inset 0 0 0 1px var(--line);
 }
 
@@ -600,6 +601,104 @@ button.btn {
 	border-radius: 14px;
 	background: var(--blue);
 	box-shadow: 0 0 0 8px rgba(11, 61, 117, 0.08);
+}
+
+.demo-thumb b,
+.demo-thumb em {
+	position: absolute;
+	z-index: 1;
+	font-style: normal;
+	font-weight: 900;
+}
+
+.demo-thumb b {
+	left: 38px;
+	top: 34px;
+	color: rgba(11, 61, 117, 0.22);
+	font-size: 42px;
+	line-height: 1;
+}
+
+.demo-thumb em {
+	left: 38px;
+	right: 118px;
+	bottom: 38px;
+	padding-top: 14px;
+	border-top: 3px solid rgba(11, 61, 117, 0.12);
+	color: var(--ink);
+	font-size: 13px;
+}
+
+.demo-thumb-packaging {
+	background: linear-gradient(135deg, #e9f5ec, #fff7e8);
+}
+
+.demo-thumb-packaging i {
+	background: #2f7d46;
+}
+
+.demo-thumb-spa {
+	background: linear-gradient(135deg, #fbe7ef, #eef9f5);
+}
+
+.demo-thumb-spa i {
+	background: #b83272;
+}
+
+.demo-thumb-build {
+	background: linear-gradient(135deg, #e8edf5, #fff2df);
+}
+
+.demo-thumb-build i {
+	background: #58616f;
+}
+
+.demo-thumb-dental {
+	background: linear-gradient(135deg, #dff5ff, #f5fbff);
+}
+
+.demo-thumb-dental i {
+	background: #0277a8;
+}
+
+.demo-thumb-interior {
+	background: linear-gradient(135deg, #f3eadf, #f8fbff);
+}
+
+.demo-thumb-interior i {
+	background: #7a5841;
+}
+
+.demo-thumb-food {
+	background: linear-gradient(135deg, #fff1d9, #ffe4df);
+}
+
+.demo-thumb-food i {
+	background: #c34722;
+}
+
+.demo-thumb-service {
+	background: linear-gradient(135deg, #e8ecff, #f8fbff);
+}
+
+.demo-thumb-service i {
+	background: var(--blue);
+}
+
+.demo-thumb-realty {
+	background: linear-gradient(135deg, #e6f2ff, #e9f8ed);
+}
+
+.demo-thumb-realty i {
+	background: #176b57;
+}
+
+.demo-thumb-edu {
+	background: linear-gradient(135deg, #edf0ff, #fff8da);
+}
+
+.demo-thumb-edu i {
+	background: #5146a8;
 }
 
 .demo-body {
