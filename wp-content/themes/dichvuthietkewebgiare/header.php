@@ -20,8 +20,7 @@
 			<?php if ( has_custom_logo() ) : ?>
 				<?php the_custom_logo(); ?>
 			<?php else : ?>
-				<span class="brand-title"><?php esc_html_e( 'Dịch Vụ Thiết Kế Web Giá Rẻ', 'dvtkwgr' ); ?></span>
-				<span class="brand-domain">dichvuthietkewebgiare.com</span>
+				<img class="brand-logo" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo-header.png' ); ?>" alt="<?php esc_attr_e( 'Dịch Vụ Thiết Kế Web Giá Rẻ', 'dvtkwgr' ); ?>" width="1224" height="339">
 			<?php endif; ?>
 		</a>
 		<button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" data-menu-toggle>

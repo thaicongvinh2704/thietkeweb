@@ -170,7 +170,17 @@ body.admin-bar .site-header {
 .brand {
 	display: grid;
 	gap: 2px;
-	min-width: 220px;
+	min-width: 260px;
+	align-items: center;
+	line-height: 0;
+}
+
+.brand img,
+.brand-logo,
+.custom-logo {
+	display: block;
+	width: min(280px, 42vw);
+	height: auto;
 }
 
 .brand-title {
@@ -1266,6 +1276,12 @@ textarea:focus {
 
 	.brand {
 		min-width: 0;
+	}
+
+	.brand img,
+	.brand-logo,
+	.custom-logo {
+		width: min(220px, 58vw);
 	}
 
 	.brand-title {
