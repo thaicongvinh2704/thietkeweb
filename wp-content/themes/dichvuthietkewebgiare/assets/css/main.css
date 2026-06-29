@@ -1613,6 +1613,7 @@ textarea:focus {
 }
 
 .page-hero-media .content-block {
+	border: 0;
 	box-shadow: none;
 	padding: 0;
 	background: transparent;

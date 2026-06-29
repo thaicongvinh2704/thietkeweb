@@ -183,11 +183,22 @@ function dvtkwgr_breadcrumb() {
 	if ( is_front_page() ) {
 		return;
 	}
+	$virtual_titles = array(
+		'gioi-thieu'                 => 'Giới thiệu',
+		'tin-tuc'                   => 'Tin tức',
+		'lien-he'                   => 'Liên hệ',
+		'mau-website-doanh-nghiep'  => 'Mẫu website doanh nghiệp',
+	);
+	$virtual_page   = get_query_var( 'dvtkwgr_virtual_page' );
+	$current_title  = isset( $virtual_titles[ $virtual_page ] ) ? $virtual_titles[ $virtual_page ] : '';
+	if ( ! $current_title ) {
+		$current_title = get_the_title() ? get_the_title() : wp_get_document_title();
+	}
 	?>
 	<nav class="breadcrumb" aria-label="<?php esc_attr_e( 'Đường dẫn', 'dvtkwgr' ); ?>">
 		<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Trang chủ', 'dvtkwgr' ); ?></a>
 		<span aria-hidden="true">/</span>
-		<span><?php echo esc_html( get_the_title() ? get_the_title() : wp_get_document_title() ); ?></span>
+		<span><?php echo esc_html( $current_title ); ?></span>
 	</nav>
 	<?php
 }

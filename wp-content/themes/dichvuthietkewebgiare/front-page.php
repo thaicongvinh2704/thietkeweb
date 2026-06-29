@@ -69,7 +69,7 @@ $blog_cards = array(
 			<h2><?php esc_html_e( 'Bảng Giá Dịch Vụ Thiết Kế Website', 'dvtkwgr' ); ?></h2>
 			<p><?php esc_html_e( 'Ba dạng gói dịch vụ phù hợp mọi quy mô doanh nghiệp. Cam kết chất lượng, bàn giao đúng hẹn.', 'dvtkwgr' ); ?></p>
 		</div>
-		<div class="pricing-board reveal">
+		<div class="pricing-board">
 			<article class="pricing-package">
 				<p class="package-kicker"><?php esc_html_e( 'Gói cơ bản', 'dvtkwgr' ); ?></p>
 				<h3><?php esc_html_e( 'Khởi Nghiệp', 'dvtkwgr' ); ?></h3>
