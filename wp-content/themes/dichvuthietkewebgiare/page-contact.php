@@ -9,13 +9,19 @@ get_header();
 dvtkwgr_breadcrumb();
 ?>
 <section class="page-hero section">
-	<div class="container narrow reveal">
-		<p class="eyebrow"><?php esc_html_e( 'Tư vấn miễn phí', 'dvtkwgr' ); ?></p>
-		<h1><?php esc_html_e( 'Liên hệ tư vấn thiết kế website', 'dvtkwgr' ); ?></h1>
-		<p><?php esc_html_e( 'Gửi thông tin nhu cầu, ngành nghề và ngân sách dự kiến. Chúng tôi sẽ phản hồi trong ngày làm việc với hướng triển khai phù hợp.', 'dvtkwgr' ); ?></p>
+	<div class="container split-media page-hero-media">
+		<div class="content-block reveal">
+			<p class="eyebrow"><?php esc_html_e( 'Tư vấn miễn phí', 'dvtkwgr' ); ?></p>
+			<h1><?php esc_html_e( 'Liên hệ tư vấn thiết kế website', 'dvtkwgr' ); ?></h1>
+			<p><?php esc_html_e( 'Gửi thông tin nhu cầu, ngành nghề và ngân sách dự kiến. Chúng tôi sẽ phản hồi trong ngày làm việc với hướng triển khai phù hợp.', 'dvtkwgr' ); ?></p>
+		</div>
+		<figure class="section-visual reveal">
+			<img src="<?php echo esc_url( dvtkwgr_asset( 'images/contact-web-design-consultation.webp' ) ); ?>" alt="<?php esc_attr_e( 'Liên hệ tư vấn thiết kế website WordPress giá rẻ', 'dvtkwgr' ); ?>" width="760" height="520" fetchpriority="high" decoding="async">
+		</figure>
 	</div>
 </section>
-<section class="section">
+
+<section class="section" id="contact">
 	<div class="container contact-grid">
 		<aside class="contact-info reveal">
 			<h2><?php esc_html_e( 'Thông tin liên hệ', 'dvtkwgr' ); ?></h2>
@@ -25,9 +31,10 @@ dvtkwgr_breadcrumb();
 				<li><strong><?php esc_html_e( 'Khu vực hỗ trợ:', 'dvtkwgr' ); ?></strong> <?php esc_html_e( 'Toàn quốc, tư vấn online', 'dvtkwgr' ); ?></li>
 				<li><strong><?php esc_html_e( 'Thời gian phản hồi:', 'dvtkwgr' ); ?></strong> <?php esc_html_e( 'Trong ngày làm việc', 'dvtkwgr' ); ?></li>
 			</ul>
+			<p><?php esc_html_e( 'Bạn có thể gửi mô tả ngắn về ngành nghề, số trang cần làm, website tham khảo và ngân sách dự kiến để được tư vấn nhanh hơn.', 'dvtkwgr' ); ?></p>
 		</aside>
 		<form class="contact-form reveal" action="#" method="post">
-			<?php /* Connect this static form to Contact Form 7, Fluent Forms, or a custom handler when needed. */ ?>
+			<?php /* Kết nối Contact Form 7, Fluent Forms hoặc custom handler tại đây khi cần xử lý gửi form thật. */ ?>
 			<label><?php esc_html_e( 'Họ tên', 'dvtkwgr' ); ?><input type="text" name="name" autocomplete="name"></label>
 			<label><?php esc_html_e( 'Số điện thoại/Zalo', 'dvtkwgr' ); ?><input type="tel" name="phone" autocomplete="tel"></label>
 			<label><?php esc_html_e( 'Email', 'dvtkwgr' ); ?><input type="email" name="email" autocomplete="email"></label>
@@ -46,6 +53,7 @@ dvtkwgr_breadcrumb();
 		</form>
 	</div>
 </section>
+
 <section class="section section-muted">
 	<div class="container">
 		<div class="section-heading reveal">

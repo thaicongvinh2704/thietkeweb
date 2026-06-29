@@ -17,6 +17,14 @@ $blog_query = new WP_Query(
 		'ignore_sticky_posts' => false,
 	)
 );
+
+$fallback_posts = array(
+	array( 'image' => 'cheap-website-professional-blog-thumbnail.webp', 'category' => 'Tư vấn website', 'title' => 'Website giá rẻ có chuyên nghiệp không?', 'excerpt' => 'Những tiêu chí giúp một website chi phí hợp lý vẫn tạo cảm giác đáng tin và bán hàng tốt.', 'alt' => 'Website giá rẻ có chuyên nghiệp không' ),
+	array( 'image' => 'wordpress-website-preparation-blog-thumbnail.webp', 'category' => 'Chuẩn bị nội dung', 'title' => 'Làm website WordPress cần chuẩn bị gì?', 'excerpt' => 'Logo, hình ảnh, danh sách dịch vụ, thông tin liên hệ và website tham khảo nên có trước khi bắt đầu.', 'alt' => 'Những thứ cần chuẩn bị trước khi làm website WordPress' ),
+	array( 'image' => 'website-design-cost-breakdown-blog-thumbnail.webp', 'category' => 'Chi phí', 'title' => 'Chi phí thiết kế website gồm những gì?', 'excerpt' => 'Hiểu rõ các khoản thường gặp để tránh phát sinh và chọn phạm vi phù hợp ngân sách.', 'alt' => 'Chi phí thiết kế website gồm những khoản nào' ),
+	array( 'image' => 'landing-page-for-small-business-blog-thumbnail.webp', 'category' => 'Landing page', 'title' => 'Landing page là gì và khi nào doanh nghiệp nhỏ nên dùng?', 'excerpt' => 'Landing page phù hợp khi cần giới thiệu một dịch vụ, chạy quảng cáo hoặc kiểm thử nhu cầu thị trường.', 'alt' => 'Landing page cho doanh nghiệp nhỏ' ),
+	array( 'image' => 'website-design-process-blog-thumbnail.webp', 'category' => 'Quy trình', 'title' => 'Quy trình thiết kế website chuyên nghiệp gồm những bước nào?', 'excerpt' => 'Một quy trình rõ giúp khách hàng biết khi nào xem demo, thanh toán và nhận bàn giao quản trị.', 'alt' => 'Quy trình thiết kế website chuyên nghiệp' ),
+);
 ?>
 <section class="page-hero section">
 	<div class="container narrow reveal">
@@ -46,10 +54,19 @@ $blog_query = new WP_Query(
 					?>
 				</div>
 			<?php else : ?>
-				<article class="content-block">
-					<h2><?php esc_html_e( 'Chưa có bài viết', 'dvtkwgr' ); ?></h2>
-					<p><?php esc_html_e( 'Nội dung tin tức sẽ được cập nhật trong thời gian tới.', 'dvtkwgr' ); ?></p>
-				</article>
+				<div class="blog-card-grid fallback-blog-grid">
+					<?php foreach ( $fallback_posts as $post ) : ?>
+						<article class="static-blog-card reveal">
+							<img src="<?php echo esc_url( dvtkwgr_asset( 'images/' . $post['image'] ) ); ?>" alt="<?php echo esc_attr( $post['alt'] ); ?>" width="720" height="450" loading="lazy" decoding="async">
+							<div>
+								<span><?php echo esc_html( $post['category'] ); ?></span>
+								<h2><?php echo esc_html( $post['title'] ); ?></h2>
+								<p><?php echo esc_html( $post['excerpt'] ); ?></p>
+								<a class="text-link" href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>"><?php esc_html_e( 'Đọc thêm', 'dvtkwgr' ); ?></a>
+							</div>
+						</article>
+					<?php endforeach; ?>
+				</div>
 			<?php endif; ?>
 			<?php wp_reset_postdata(); ?>
 		</div>

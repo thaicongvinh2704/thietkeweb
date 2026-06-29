@@ -10,7 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'DVTKWGR_VERSION', '1.0.0' );
-define( 'DVTKWGR_REWRITE_VERSION', '20260629' );
+define( 'DVTKWGR_REWRITE_VERSION', '20260629.2' );
+
+function dvtkwgr_asset( $path ) {
+	return get_template_directory_uri() . '/assets/' . ltrim( $path, '/' );
+}
 
 function dvtkwgr_setup() {
 	load_theme_textdomain( 'dvtkwgr', get_template_directory() . '/languages' );
@@ -55,6 +59,7 @@ function dvtkwgr_register_virtual_routes() {
 	add_rewrite_tag( '%dvtkwgr_virtual_page%', '([^&]+)' );
 	add_rewrite_rule( '^tin-tuc/page/([0-9]+)/?$', 'index.php?dvtkwgr_virtual_page=tin-tuc&paged=$matches[1]', 'top' );
 	add_rewrite_rule( '^tin-tuc/?$', 'index.php?dvtkwgr_virtual_page=tin-tuc', 'top' );
+	add_rewrite_rule( '^gioi-thieu/?$', 'index.php?dvtkwgr_virtual_page=gioi-thieu', 'top' );
 	add_rewrite_rule( '^lien-he/?$', 'index.php?dvtkwgr_virtual_page=lien-he', 'top' );
 }
 add_action( 'init', 'dvtkwgr_register_virtual_routes' );
@@ -94,6 +99,10 @@ function dvtkwgr_virtual_route_template( $template ) {
 
 	if ( 'tin-tuc' === $virtual_page ) {
 		return get_template_directory() . '/page-tin-tuc.php';
+	}
+
+	if ( 'gioi-thieu' === $virtual_page ) {
+		return get_template_directory() . '/page-about.php';
 	}
 
 	if ( 'lien-he' === $virtual_page ) {

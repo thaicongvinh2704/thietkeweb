@@ -40,7 +40,7 @@
 		</section>
 	</div>
 	<div class="container footer-bottom">
-		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> dichvuthietkewebgiare.com. <?php esc_html_e( 'All rights reserved.', 'dvtkwgr' ); ?></p>
+		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( wp_parse_url( home_url(), PHP_URL_HOST ) ); ?>. <?php esc_html_e( 'All rights reserved.', 'dvtkwgr' ); ?></p>
 	</div>
 </footer>
 <div class="mobile-sticky-cta" aria-label="<?php esc_attr_e( 'Liên hệ nhanh', 'dvtkwgr' ); ?>">
