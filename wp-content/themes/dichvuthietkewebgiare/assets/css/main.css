@@ -150,7 +150,7 @@ ol {
 	position: sticky;
 	z-index: 100;
 	top: 0;
-	background: rgba(255, 255, 255, 0.94);
+	background: rgba(255, 255, 255, 0.96);
 	border-bottom: 1px solid rgba(221, 230, 242, 0.8);
 	backdrop-filter: blur(12px);
 }
@@ -163,24 +163,26 @@ body.admin-bar .site-header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	min-height: 78px;
-	gap: 24px;
+	min-height: 76px;
+	gap: 34px;
 }
 
 .brand {
-	display: grid;
-	gap: 2px;
-	min-width: 260px;
+	display: inline-flex;
+	flex: 0 0 auto;
 	align-items: center;
+	width: min(340px, 35vw);
+	min-width: 220px;
 	line-height: 0;
 }
 
-.brand img,
-.brand-logo,
-.custom-logo {
+.brand-logo {
 	display: block;
-	width: min(280px, 42vw);
+	width: 100%;
+	max-height: 64px;
 	height: auto;
+	object-fit: contain;
+	object-position: left center;
 }
 
 .brand-title {
@@ -197,25 +199,31 @@ body.admin-bar .site-header {
 .primary-nav {
 	display: flex;
 	align-items: center;
-	gap: 22px;
+	justify-content: flex-end;
+	gap: 18px;
+	min-width: 0;
 }
 
 .primary-nav ul {
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: 4px;
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	white-space: nowrap;
 }
 
 .primary-nav a {
 	display: inline-flex;
 	align-items: center;
+	justify-content: center;
 	min-height: 42px;
-	padding: 8px 12px;
+	padding: 8px 10px;
 	color: var(--ink);
 	font-weight: 700;
+	line-height: 1.2;
+	text-align: center;
 }
 
 .primary-nav a:hover,
@@ -271,6 +279,10 @@ button.btn {
 
 .nav-cta {
 	white-space: nowrap;
+	min-height: 40px;
+	padding: 10px 16px;
+	border-radius: 8px;
+	font-size: 0.94rem;
 }
 
 .menu-toggle {
@@ -1097,6 +1109,28 @@ textarea:focus {
 }
 
 @media (max-width: 1100px) {
+	.header-inner {
+		gap: 22px;
+	}
+
+	.brand {
+		width: min(300px, 32vw);
+		min-width: 190px;
+	}
+
+	.primary-nav {
+		gap: 12px;
+	}
+
+	.primary-nav a {
+		padding-inline: 8px;
+		font-size: 0.94rem;
+	}
+
+	.nav-cta {
+		padding-inline: 14px;
+	}
+
 	.card-grid.five,
 	.card-grid.services,
 	.timeline {
@@ -1125,6 +1159,15 @@ textarea:focus {
 
 	.header-inner {
 		min-height: 68px;
+	}
+
+	.brand {
+		width: min(260px, 58vw);
+		min-width: 0;
+	}
+
+	.brand-logo {
+		max-height: 54px;
 	}
 
 	.menu-toggle {
@@ -1161,10 +1204,12 @@ textarea:focus {
 	.primary-nav ul {
 		display: grid;
 		gap: 2px;
+		white-space: normal;
 	}
 
 	.primary-nav a {
 		width: 100%;
+		justify-content: flex-start;
 	}
 
 	.nav-cta {
@@ -1275,13 +1320,11 @@ textarea:focus {
 	}
 
 	.brand {
-		min-width: 0;
+		width: min(230px, 62vw);
 	}
 
-	.brand img,
-	.brand-logo,
-	.custom-logo {
-		width: min(220px, 58vw);
+	.brand-logo {
+		max-height: 48px;
 	}
 
 	.brand-title {

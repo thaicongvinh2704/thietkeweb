@@ -17,11 +17,7 @@
 <header class="site-header" data-header>
 	<div class="container header-inner">
 		<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Dịch Vụ Thiết Kế Web Giá Rẻ', 'dvtkwgr' ); ?>">
-			<?php if ( has_custom_logo() ) : ?>
-				<?php the_custom_logo(); ?>
-			<?php else : ?>
-				<img class="brand-logo" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo-header.png' ); ?>" alt="<?php esc_attr_e( 'Dịch Vụ Thiết Kế Web Giá Rẻ', 'dvtkwgr' ); ?>" width="1224" height="339">
-			<?php endif; ?>
+			<img class="brand-logo" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo-header.png' ); ?>" alt="<?php esc_attr_e( 'Dịch Vụ Thiết Kế Web Giá Rẻ', 'dvtkwgr' ); ?>" width="1244" height="344">
 		</a>
 		<button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" data-menu-toggle>
 			<span class="menu-toggle-bars" aria-hidden="true"></span>
