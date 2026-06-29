@@ -75,7 +75,7 @@ $blog_cards = array(
 				$view_url    = ! empty( $demo['view_url'] ) ? $demo['view_url'] : '#';
 				?>
 				<article class="demo-card image-demo-card reveal <?php echo 'mau-website-doanh-nghiep' === $sample_slug ? 'demo-business-card' : ''; ?>">
-					<a class="demo-image" href="#" aria-label="<?php echo esc_attr( 'Xem ' . $demo['title'] ); ?>">
+					<a class="demo-image" href="<?php echo esc_url( $view_url ); ?>" aria-label="<?php echo esc_attr( 'Xem ' . $demo['title'] ); ?>">
 						<img src="<?php echo esc_url( dvtkwgr_asset( 'images/' . $demo['image'] ) ); ?>" alt="<?php echo esc_attr( $demo['alt'] ); ?>" width="720" height="480" loading="lazy" decoding="async">
 					</a>
 					<div class="demo-body">
