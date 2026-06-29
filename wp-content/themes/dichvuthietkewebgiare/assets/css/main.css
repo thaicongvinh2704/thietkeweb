@@ -1377,6 +1377,21 @@ textarea:focus {
 	transform: scale(1.03);
 }
 
+.demo-business-card .demo-image {
+	padding: 10px;
+	background: linear-gradient(180deg, #f8fbff, #eef5fc);
+}
+
+.demo-business-card .demo-image img {
+	object-fit: contain;
+	border-radius: 12px;
+	background: var(--white);
+}
+
+.demo-business-card:hover .demo-image img {
+	transform: scale(1.015);
+}
+
 .demo-tag,
 .static-blog-card span {
 	display: inline-flex;
@@ -1473,10 +1488,97 @@ textarea:focus {
 	margin-top: 1.8em;
 }
 
+.template-hero {
+	background:
+		linear-gradient(120deg, rgba(243, 247, 251, 0.98), rgba(255, 255, 255, 0.94) 58%, rgba(255, 246, 239, 0.9)),
+		var(--soft);
+}
+
+.template-hero-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 0.88fr) minmax(420px, 1.12fr);
+	align-items: center;
+	gap: 46px;
+}
+
+.template-hero-copy p {
+	max-width: 680px;
+	color: var(--muted);
+}
+
+.template-hero-preview {
+	margin: 0;
+	padding: 12px;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg);
+	background: var(--white);
+	box-shadow: var(--shadow-soft);
+}
+
+.template-hero-preview img {
+	width: 100%;
+	height: auto;
+	border-radius: 12px;
+}
+
+.template-quick-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-top: 22px;
+}
+
+.template-quick-links a {
+	color: var(--blue-2);
+	font-weight: 800;
+}
+
+.template-gallery {
+	max-width: 1120px;
+}
+
+.template-shot {
+	margin: 0 0 26px;
+	padding: 14px;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg);
+	background: var(--white);
+	box-shadow: 0 12px 30px rgba(17, 36, 63, 0.07);
+}
+
+.template-shot figcaption {
+	margin-bottom: 12px;
+	color: var(--ink);
+	font-size: 1rem;
+	font-weight: 900;
+}
+
+.template-shot img {
+	width: 100%;
+	height: auto;
+	border-radius: 12px;
+	background: var(--soft);
+}
+
+.template-shot.is-large {
+	margin-bottom: 34px;
+}
+
+.template-info-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 22px;
+}
+
 @media (max-width: 1100px) {
 	.split-media,
 	.process-layout,
 	.page-hero-media {
+		grid-template-columns: 1fr;
+	}
+
+	.template-hero-grid,
+	.template-info-grid {
 		grid-template-columns: 1fr;
 	}
 
@@ -1497,6 +1599,16 @@ textarea:focus {
 	.hero-media img,
 	.section-visual img {
 		border-radius: 14px;
+	}
+
+	.template-hero-preview,
+	.template-shot {
+		padding: 8px;
+		border-radius: 14px;
+	}
+
+	.template-quick-links {
+		display: grid;
 	}
 }
 

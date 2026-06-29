@@ -8,7 +8,7 @@
 get_header();
 
 $demo_cards = array(
-	array( 'image' => 'simple-company-website-demo-thumbnail.webp', 'tag' => 'Doanh nghiệp', 'title' => 'Mẫu website doanh nghiệp nhỏ', 'desc' => 'Phù hợp công ty mới, dịch vụ địa phương, giới thiệu năng lực và nhận yêu cầu tư vấn.', 'alt' => 'Mẫu website doanh nghiệp nhỏ chuyên nghiệp' ),
+	array( 'image' => 'templates/business/mau-website-doanh-nghiep-thumbnail.webp', 'tag' => 'Doanh nghiệp', 'title' => 'Mẫu website doanh nghiệp', 'desc' => 'Phù hợp công ty mới, công ty dịch vụ, doanh nghiệp địa phương, giới thiệu năng lực và nhận yêu cầu tư vấn.', 'alt' => 'Mẫu website doanh nghiệp chuyên nghiệp cho công ty nhỏ', 'slug' => 'mau-website-doanh-nghiep', 'view_url' => home_url( '/mau-giao-dien/mau-website-doanh-nghiep/' ) ),
 	array( 'image' => 'ecommerce-company-website-demo-thumbnail.webp', 'tag' => 'Bán hàng', 'title' => 'Mẫu website bán hàng đơn giản', 'desc' => 'Phù hợp cửa hàng nhỏ, catalog sản phẩm, nhận đơn và tư vấn nhanh qua Zalo.', 'alt' => 'Mẫu website bán hàng đơn giản cho cửa hàng nhỏ' ),
 	array( 'image' => 'construction-website-demo-thumbnail.webp', 'tag' => 'Xây dựng', 'title' => 'Mẫu website xây dựng', 'desc' => 'Phù hợp công ty xây dựng, sửa chữa nhà, nhà thầu, hồ sơ năng lực và báo giá.', 'alt' => 'Mẫu website công ty xây dựng và sửa chữa nhà' ),
 	array( 'image' => 'dental-clinic-website-demo-thumbnail.webp', 'tag' => 'Nha khoa', 'title' => 'Mẫu website nha khoa', 'desc' => 'Phù hợp phòng khám nha khoa, dịch vụ răng hàm mặt, tư vấn lịch hẹn.', 'alt' => 'Mẫu website phòng khám nha khoa chuyên nghiệp' ),
@@ -70,8 +70,11 @@ $blog_cards = array(
 		</div>
 		<div class="demo-grid image-card-grid">
 			<?php foreach ( $demo_cards as $demo ) : ?>
-				<?php $sample_slug = sanitize_title( $demo['title'] ); ?>
-				<article class="demo-card image-demo-card reveal">
+				<?php
+				$sample_slug = ! empty( $demo['slug'] ) ? $demo['slug'] : sanitize_title( $demo['title'] );
+				$view_url    = ! empty( $demo['view_url'] ) ? $demo['view_url'] : '#';
+				?>
+				<article class="demo-card image-demo-card reveal <?php echo 'mau-website-doanh-nghiep' === $sample_slug ? 'demo-business-card' : ''; ?>">
 					<a class="demo-image" href="#" aria-label="<?php echo esc_attr( 'Xem ' . $demo['title'] ); ?>">
 						<img src="<?php echo esc_url( dvtkwgr_asset( 'images/' . $demo['image'] ) ); ?>" alt="<?php echo esc_attr( $demo['alt'] ); ?>" width="720" height="480" loading="lazy" decoding="async">
 					</a>
@@ -80,7 +83,7 @@ $blog_cards = array(
 						<h3><?php echo esc_html( $demo['title'] ); ?></h3>
 						<p><?php echo esc_html( $demo['desc'] ); ?></p>
 						<div class="demo-actions">
-							<a href="#"><?php esc_html_e( 'Xem mẫu', 'dvtkwgr' ); ?></a>
+							<a href="<?php echo esc_url( $view_url ); ?>"><?php esc_html_e( 'Xem mẫu', 'dvtkwgr' ); ?></a>
 							<a href="<?php echo esc_url( add_query_arg( 'mau', $sample_slug, home_url( '/lien-he/' ) ) ); ?>"><?php esc_html_e( 'Chọn mẫu này', 'dvtkwgr' ); ?></a>
 						</div>
 					</div>

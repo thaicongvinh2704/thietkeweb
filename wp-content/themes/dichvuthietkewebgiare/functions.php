@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'DVTKWGR_VERSION', '1.0.0' );
-define( 'DVTKWGR_REWRITE_VERSION', '20260629.2' );
+define( 'DVTKWGR_REWRITE_VERSION', '20260629.3' );
 
 function dvtkwgr_asset( $path ) {
 	return get_template_directory_uri() . '/assets/' . ltrim( $path, '/' );
@@ -61,6 +61,7 @@ function dvtkwgr_register_virtual_routes() {
 	add_rewrite_rule( '^tin-tuc/?$', 'index.php?dvtkwgr_virtual_page=tin-tuc', 'top' );
 	add_rewrite_rule( '^gioi-thieu/?$', 'index.php?dvtkwgr_virtual_page=gioi-thieu', 'top' );
 	add_rewrite_rule( '^lien-he/?$', 'index.php?dvtkwgr_virtual_page=lien-he', 'top' );
+	add_rewrite_rule( '^mau-giao-dien/mau-website-doanh-nghiep/?$', 'index.php?dvtkwgr_virtual_page=mau-website-doanh-nghiep', 'top' );
 }
 add_action( 'init', 'dvtkwgr_register_virtual_routes' );
 
@@ -107,6 +108,10 @@ function dvtkwgr_virtual_route_template( $template ) {
 
 	if ( 'lien-he' === $virtual_page ) {
 		return get_template_directory() . '/page-contact.php';
+	}
+
+	if ( 'mau-website-doanh-nghiep' === $virtual_page ) {
+		return get_template_directory() . '/template-demo-business.php';
 	}
 
 	return $template;
