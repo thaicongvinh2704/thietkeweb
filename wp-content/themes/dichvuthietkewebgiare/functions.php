@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'DVTKWGR_VERSION', '1.0.0' );
+define( 'DVTKWGR_REWRITE_VERSION', '20260629' );
 
 function dvtkwgr_setup() {
 	load_theme_textdomain( 'dvtkwgr', get_template_directory() . '/languages' );
@@ -49,6 +50,59 @@ function dvtkwgr_widgets_init() {
 	);
 }
 add_action( 'widgets_init', 'dvtkwgr_widgets_init' );
+
+function dvtkwgr_register_virtual_routes() {
+	add_rewrite_tag( '%dvtkwgr_virtual_page%', '([^&]+)' );
+	add_rewrite_rule( '^tin-tuc/page/([0-9]+)/?$', 'index.php?dvtkwgr_virtual_page=tin-tuc&paged=$matches[1]', 'top' );
+	add_rewrite_rule( '^tin-tuc/?$', 'index.php?dvtkwgr_virtual_page=tin-tuc', 'top' );
+	add_rewrite_rule( '^lien-he/?$', 'index.php?dvtkwgr_virtual_page=lien-he', 'top' );
+}
+add_action( 'init', 'dvtkwgr_register_virtual_routes' );
+
+function dvtkwgr_virtual_route_query_vars( $vars ) {
+	$vars[] = 'dvtkwgr_virtual_page';
+
+	return $vars;
+}
+add_filter( 'query_vars', 'dvtkwgr_virtual_route_query_vars' );
+
+function dvtkwgr_flush_virtual_routes_once() {
+	if ( get_option( 'dvtkwgr_rewrite_version' ) === DVTKWGR_REWRITE_VERSION ) {
+		return;
+	}
+
+	dvtkwgr_register_virtual_routes();
+	flush_rewrite_rules( false );
+	update_option( 'dvtkwgr_rewrite_version', DVTKWGR_REWRITE_VERSION );
+}
+add_action( 'init', 'dvtkwgr_flush_virtual_routes_once', 20 );
+
+function dvtkwgr_virtual_route_status( $handled, $query ) {
+	if ( $query->get( 'dvtkwgr_virtual_page' ) ) {
+		$query->is_404 = false;
+		status_header( 200 );
+
+		return true;
+	}
+
+	return $handled;
+}
+add_filter( 'pre_handle_404', 'dvtkwgr_virtual_route_status', 10, 2 );
+
+function dvtkwgr_virtual_route_template( $template ) {
+	$virtual_page = get_query_var( 'dvtkwgr_virtual_page' );
+
+	if ( 'tin-tuc' === $virtual_page ) {
+		return get_template_directory() . '/page-tin-tuc.php';
+	}
+
+	if ( 'lien-he' === $virtual_page ) {
+		return get_template_directory() . '/page-contact.php';
+	}
+
+	return $template;
+}
+add_filter( 'template_include', 'dvtkwgr_virtual_route_template' );
 
 function dvtkwgr_excerpt_length() {
 	return 24;
