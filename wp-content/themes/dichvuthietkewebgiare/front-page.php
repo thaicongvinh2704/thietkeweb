@@ -34,7 +34,7 @@ $blog_cards = array(
 			<p class="hero-lead"><?php esc_html_e( 'Giúp cá nhân, cửa hàng và doanh nghiệp nhỏ có website chuyên nghiệp, dễ quản trị, dễ liên hệ khách hàng qua Zalo, điện thoại hoặc form tư vấn.', 'dvtkwgr' ); ?></p>
 			<div class="hero-actions">
 				<a class="btn btn-primary" href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>"><?php esc_html_e( 'Nhận tư vấn miễn phí', 'dvtkwgr' ); ?></a>
-				<a class="btn btn-secondary" href="#mau-giao-dien"><?php esc_html_e( 'Xem mẫu giao diện', 'dvtkwgr' ); ?></a>
+				<a class="btn btn-secondary" href="#bang-gia"><?php esc_html_e( 'Xem bảng giá', 'dvtkwgr' ); ?></a>
 			</div>
 			<div class="trust-row" aria-label="<?php esc_attr_e( 'Cam kết dịch vụ', 'dvtkwgr' ); ?>">
 				<span><?php esc_html_e( 'Có demo trước', 'dvtkwgr' ); ?></span>
@@ -62,12 +62,86 @@ $blog_cards = array(
 	</div>
 </section>
 
-<section id="mau-giao-dien" class="section section-muted">
+<section id="bang-gia" class="section section-muted">
 	<div class="container">
 		<div class="section-heading reveal">
-			<p class="eyebrow"><?php esc_html_e( 'Demo ngành nghề', 'dvtkwgr' ); ?></p>
-			<h2><?php esc_html_e( 'Mẫu giao diện phù hợp nhiều ngành nghề', 'dvtkwgr' ); ?></h2>
+			<p class="eyebrow"><?php esc_html_e( 'Báo giá minh bạch', 'dvtkwgr' ); ?></p>
+			<h2><?php esc_html_e( 'Bảng Giá Dịch Vụ Thiết Kế Website', 'dvtkwgr' ); ?></h2>
+			<p><?php esc_html_e( 'Ba dạng gói dịch vụ phù hợp mọi quy mô doanh nghiệp. Cam kết chất lượng, bàn giao đúng hẹn.', 'dvtkwgr' ); ?></p>
 		</div>
+		<div class="pricing-board reveal">
+			<article class="pricing-package">
+				<p class="package-kicker"><?php esc_html_e( 'Gói cơ bản', 'dvtkwgr' ); ?></p>
+				<h3><?php esc_html_e( 'Khởi Nghiệp', 'dvtkwgr' ); ?></h3>
+				<div class="package-price"><strong>990.000</strong><span>đ</span></div>
+				<p class="package-note"><?php esc_html_e( 'Giao diện landing page gọn, rõ CTA, phù hợp cá nhân và doanh nghiệp nhỏ.', 'dvtkwgr' ); ?></p>
+				<h4><?php esc_html_e( 'Thời gian triển khai: 3-5 ngày', 'dvtkwgr' ); ?></h4>
+				<ul>
+					<li><?php esc_html_e( 'Thiết kế 1 landing page theo template tối ưu chuyển đổi.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Tùy chỉnh màu sắc theo nhận diện thương hiệu.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Giao diện chuẩn mobile, PC và tablet.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Tối ưu tốc độ tải trang cơ bản.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Chuẩn SEO cơ bản: meta title, description.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Tích hợp form tư vấn hoặc thông tin khách hàng.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Trang cảm ơn sau khi đăng ký.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Tích hợp nút gọi nhanh, Zalo, Messenger.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Bàn giao source code.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Hướng dẫn quản trị sau bàn giao.', 'dvtkwgr' ); ?></li>
+				</ul>
+				<a class="btn btn-secondary" href="<?php echo esc_url( add_query_arg( 'goi', 'khoi-nghiep', home_url( '/lien-he/' ) ) ); ?>"><?php esc_html_e( 'Đăng Ký Ngay', 'dvtkwgr' ); ?></a>
+			</article>
+			<article class="pricing-package is-recommended">
+				<div class="package-badge"><?php esc_html_e( 'Được chọn nhiều nhất', 'dvtkwgr' ); ?></div>
+				<p class="package-kicker"><?php esc_html_e( 'Gói chuyên nghiệp', 'dvtkwgr' ); ?></p>
+				<h3><?php esc_html_e( 'Business Pro', 'dvtkwgr' ); ?></h3>
+				<div class="package-price"><strong>1.990.000</strong><span>đ</span></div>
+				<p class="package-note"><?php esc_html_e( 'Website nhiều trang, SEO cơ bản và giao diện chuyên nghiệp cho doanh nghiệp nhỏ.', 'dvtkwgr' ); ?></p>
+				<h4><?php esc_html_e( 'Thời gian triển khai: 7-15 ngày', 'dvtkwgr' ); ?></h4>
+				<ul>
+					<li><?php esc_html_e( 'Giao diện theo mẫu, tùy chỉnh theo nhận diện thương hiệu.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Website chuẩn SEO ngay từ đầu, responsive trên mọi thiết bị.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Tối ưu cấu trúc SEO nền tảng: URL, heading, meta, sitemap.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Sẵn sàng tích hợp SEO và quảng cáo dài hạn.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Giao diện chuẩn mobile và tablet.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Tối ưu tốc độ tải trang.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Hướng dẫn quản trị website sau bàn giao.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Thiết kế form liên hệ và nhận yêu cầu.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Thiết lập form liên hệ gửi email.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Tích hợp form liên hệ, nút gọi nhanh, Zalo, Messenger.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Cài đặt SSL bảo mật.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Hướng dẫn đăng tối ưu 05 bài viết chuẩn SEO.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Hỗ trợ kỹ thuật 24/7.', 'dvtkwgr' ); ?></li>
+				</ul>
+				<a class="btn btn-primary" href="<?php echo esc_url( add_query_arg( 'goi', 'business-pro', home_url( '/lien-he/' ) ) ); ?>"><?php esc_html_e( 'Đăng Ký Ngay', 'dvtkwgr' ); ?></a>
+			</article>
+			<article class="pricing-package">
+				<p class="package-kicker"><?php esc_html_e( 'Gói doanh nghiệp lớn', 'dvtkwgr' ); ?></p>
+				<h3><?php esc_html_e( 'Enterprise', 'dvtkwgr' ); ?></h3>
+				<div class="package-price is-contact"><?php esc_html_e( 'Liên Hệ', 'dvtkwgr' ); ?></div>
+				<p class="package-note"><?php esc_html_e( 'Báo giá theo dự án thực tế.', 'dvtkwgr' ); ?></p>
+				<ul>
+					<li><?php esc_html_e( 'Thiết kế layout giao diện độc quyền theo yêu cầu.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Thiết kế website độc quyền đa trang theo yêu cầu, chuẩn SEO nâng cao.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Thiết kế bộ nhận diện trang chủ theo yêu cầu.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Tích hợp tính năng nâng cao: giỏ hàng, vận chuyển, thanh toán.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Tích hợp công cụ đo lường: Google Analytics, Search Console.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Tối ưu tốc độ tải trang website.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Thiết lập form liên hệ, đăng ký nhận tư vấn.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Cài đặt SSL bảo mật.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Liên kết Google Map, Facebook và Zalo.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Hỗ trợ thiết lập chiến dịch Facebook/Google Ads.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Bàn giao source code và tài khoản quản trị.', 'dvtkwgr' ); ?></li>
+				</ul>
+				<h4><?php esc_html_e( 'Tặng kèm:', 'dvtkwgr' ); ?></h4>
+				<ul>
+					<li><?php esc_html_e( 'Tặng tên miền .vn năm đầu.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Hosting SSD 1 năm.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Sao lưu dữ liệu định kỳ.', 'dvtkwgr' ); ?></li>
+				</ul>
+				<a class="btn btn-primary package-orange" href="<?php echo esc_url( add_query_arg( 'goi', 'enterprise', home_url( '/lien-he/' ) ) ); ?>"><?php esc_html_e( 'Đăng Ký Ngay', 'dvtkwgr' ); ?></a>
+			</article>
+		</div>
+		<?php if ( false ) : // Tạm ẩn section mẫu giao diện trong khi hiển thị bảng báo giá. ?>
 		<div class="demo-grid image-card-grid">
 			<?php foreach ( $demo_cards as $demo ) : ?>
 				<?php
@@ -90,6 +164,7 @@ $blog_cards = array(
 				</article>
 			<?php endforeach; ?>
 		</div>
+		<?php endif; ?>
 	</div>
 </section>
 
