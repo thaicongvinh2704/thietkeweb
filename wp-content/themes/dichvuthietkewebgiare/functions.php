@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'DVTKWGR_VERSION', '1.0.1' );
+define( 'DVTKWGR_VERSION', '1.0.2' );
 define( 'DVTKWGR_REWRITE_VERSION', '20260629.5' );
 
 function dvtkwgr_asset( $path ) {

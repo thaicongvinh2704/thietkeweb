@@ -1325,7 +1325,7 @@ textarea:focus {
 }
 
 .hero-media {
-	transform: translateX(18px);
+	transform: translateX(32px);
 }
 
 .hero-media img,
