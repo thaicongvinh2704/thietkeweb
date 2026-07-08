@@ -1236,6 +1236,10 @@ textarea:focus {
 		gap: 30px;
 	}
 
+	.hero-media {
+		transform: none;
+	}
+
 	.hero-visual {
 		min-height: 360px;
 	}
@@ -1318,6 +1322,10 @@ textarea:focus {
 .hero-media,
 .section-visual {
 	margin: 0;
+}
+
+.hero-media {
+	transform: translateX(18px);
 }
 
 .hero-media img,
