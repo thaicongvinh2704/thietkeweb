@@ -184,6 +184,11 @@ body.admin-bar .site-header {
 	line-height: 0;
 }
 
+.brand-picture {
+	display: block;
+	width: 100%;
+}
+
 .brand-logo {
 	display: block;
 	width: 100%;
