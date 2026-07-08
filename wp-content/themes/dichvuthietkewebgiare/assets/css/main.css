@@ -1237,7 +1237,8 @@ textarea:focus {
 	}
 
 	.hero-media {
-		transform: none;
+		position: static;
+		left: auto;
 	}
 
 	.hero-visual {
@@ -1325,7 +1326,8 @@ textarea:focus {
 }
 
 .hero-media {
-	transform: translateX(32px);
+	position: relative;
+	left: 24px;
 }
 
 .hero-media img,
