@@ -9,3 +9,9 @@ wp-content/cache/
 Thumbs.db
 .idea/
 .vscode/
+
+# Logo asset pack managed directly on hosting.
+favicon.ico
+wp-content/themes/dichvuthietkewebgiare/assets/images/[0-9][0-9]-*
+wp-content/themes/dichvuthietkewebgiare/assets/images/README-huong-dan-su-dung.txt
+wp-content/themes/dichvuthietkewebgiare/assets/images/file logo chinh thuc.zip
