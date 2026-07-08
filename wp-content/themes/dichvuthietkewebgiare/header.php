@@ -20,7 +20,7 @@
 			<picture class="brand-picture">
 				<source media="(max-width: 640px)" srcset="<?php echo esc_url( dvtkwgr_logo_asset( '04-website-logo-header-600x200.webp' ) ); ?>" type="image/webp">
 				<source media="(max-width: 1100px)" srcset="<?php echo esc_url( dvtkwgr_logo_asset( '03-website-logo-header-800x267.webp' ) ); ?>" type="image/webp">
-				<img class="brand-logo" src="<?php echo esc_url( dvtkwgr_logo_asset( '03-website-logo-header-800x267.webp' ) ); ?>" srcset="<?php echo esc_url( dvtkwgr_logo_asset( '04-website-logo-header-600x200.webp' ) ); ?> 600w, <?php echo esc_url( dvtkwgr_logo_asset( '03-website-logo-header-800x267.webp' ) ); ?> 800w" sizes="(max-width: 640px) 230px, (max-width: 1100px) 300px, 340px" alt="<?php echo esc_attr( dvtkwgr_site_name() ); ?>" width="800" height="267" fetchpriority="high" decoding="async">
+				<img class="brand-logo" src="<?php echo esc_url( dvtkwgr_logo_asset( '03-website-logo-header-800x267.webp' ) ); ?>" srcset="<?php echo esc_url( dvtkwgr_logo_asset( '04-website-logo-header-600x200.webp' ) ); ?> 600w, <?php echo esc_url( dvtkwgr_logo_asset( '03-website-logo-header-800x267.webp' ) ); ?> 800w" sizes="(max-width: 640px) 260px, (max-width: 1100px) 340px, 420px" alt="<?php echo esc_attr( dvtkwgr_site_name() ); ?>" width="800" height="267" fetchpriority="high" decoding="async">
 			</picture>
 		</a>
 		<button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" data-menu-toggle>

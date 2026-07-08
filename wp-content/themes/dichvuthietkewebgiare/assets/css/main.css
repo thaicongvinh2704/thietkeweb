@@ -171,16 +171,16 @@ body.admin-bar .site-header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	min-height: 76px;
-	gap: 34px;
+	min-height: 92px;
+	gap: 30px;
 }
 
 .brand {
 	display: inline-flex;
 	flex: 0 0 auto;
 	align-items: center;
-	width: min(340px, 35vw);
-	min-width: 220px;
+	width: min(420px, 40vw);
+	min-width: 260px;
 	line-height: 0;
 }
 
@@ -192,7 +192,7 @@ body.admin-bar .site-header {
 .brand-logo {
 	display: block;
 	width: 100%;
-	max-height: 64px;
+	max-height: 82px;
 	height: auto;
 	object-fit: contain;
 	object-position: left center;
@@ -1127,8 +1127,8 @@ textarea:focus {
 	}
 
 	.brand {
-		width: min(300px, 32vw);
-		min-width: 190px;
+		width: min(360px, 36vw);
+		min-width: 220px;
 	}
 
 	.primary-nav {
@@ -1171,16 +1171,16 @@ textarea:focus {
 	}
 
 	.header-inner {
-		min-height: 68px;
+		min-height: 76px;
 	}
 
 	.brand {
-		width: min(260px, 58vw);
+		width: min(300px, 64vw);
 		min-width: 0;
 	}
 
 	.brand-logo {
-		max-height: 54px;
+		max-height: 60px;
 	}
 
 	.menu-toggle {
@@ -1191,7 +1191,7 @@ textarea:focus {
 
 	.primary-nav {
 		position: fixed;
-		inset: 68px 0 auto 0;
+		inset: 76px 0 auto 0;
 		display: grid;
 		gap: 12px;
 		padding: 18px 16px 22px;
@@ -1205,7 +1205,7 @@ textarea:focus {
 	}
 
 	body.admin-bar .primary-nav {
-		inset: 100px 0 auto 0;
+		inset: 122px 0 auto 0;
 	}
 
 	.menu-open .primary-nav {
@@ -1806,11 +1806,11 @@ textarea:focus {
 	}
 
 	.brand {
-		width: min(230px, 62vw);
+		width: min(280px, 72vw);
 	}
 
 	.brand-logo {
-		max-height: 48px;
+		max-height: 56px;
 	}
 
 	.brand-title {
