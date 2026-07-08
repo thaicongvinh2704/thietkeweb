@@ -51,7 +51,7 @@ $show_homepage_posts = 3 <= (int) $homepage_posts->post_count;
 			</div>
 		</div>
 		<figure class="hero-media reveal">
-			<img src="<?php echo esc_url( dvtkwgr_asset( 'images/landing-page-website-hero-banner.webp' ) ); ?>" alt="<?php esc_attr_e( 'Thiết kế website WordPress cho doanh nghiệp vừa và nhỏ', 'dvtkwgr' ); ?>" width="960" height="640" fetchpriority="high" decoding="async">
+			<img src="<?php echo esc_url( dvtkwgr_home_banner_asset() ); ?>" alt="<?php esc_attr_e( 'Thiết kế website WordPress cho doanh nghiệp vừa và nhỏ', 'dvtkwgr' ); ?>" width="960" height="640" fetchpriority="high" decoding="async">
 		</figure>
 	</div>
 </section>

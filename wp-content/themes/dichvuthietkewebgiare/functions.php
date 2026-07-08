@@ -27,6 +27,10 @@ function dvtkwgr_logo_asset( $file ) {
 	return dvtkwgr_asset( 'images/file%20logo%20chinh%20thuc/' . $file );
 }
 
+function dvtkwgr_home_banner_asset() {
+	return dvtkwgr_asset( 'images/office-people-working-centered-logo.webp' );
+}
+
 function dvtkwgr_contact_email() {
 	return 'contact@dichvuthietketrangweb.com';
 }
@@ -196,7 +200,7 @@ function dvtkwgr_seo_profiles() {
 			'title'       => 'Thiết kế website giá hợp lý cho doanh nghiệp vừa và nhỏ',
 			'description' => 'Dịch vụ thiết kế website WordPress với chi phí phù hợp, quy trình rõ ràng, có demo trước và dễ quản trị sau bàn giao.',
 			'url'         => home_url( '/' ),
-			'image'       => dvtkwgr_asset( 'images/landing-page-website-hero-banner.webp' ),
+			'image'       => dvtkwgr_home_banner_asset(),
 		),
 		'gioi-thieu'                 => array(
 			'title'       => 'Giới thiệu dịch vụ thiết kế website rõ ràng và thực tế',
@@ -348,7 +352,7 @@ function dvtkwgr_output_canonical_and_social_meta() {
 	$title       = ! empty( $profile['title'] ) ? $profile['title'] : wp_get_document_title();
 	$description = dvtkwgr_meta_description();
 	$url         = ! empty( $profile['url'] ) ? $profile['url'] : home_url( add_query_arg( array(), $GLOBALS['wp']->request ?? '' ) );
-	$image       = ! empty( $profile['image'] ) ? $profile['image'] : dvtkwgr_asset( 'images/landing-page-website-hero-banner.webp' );
+	$image       = ! empty( $profile['image'] ) ? $profile['image'] : dvtkwgr_home_banner_asset();
 	$type        = is_front_page() ? 'website' : 'article';
 	$site_name   = dvtkwgr_site_name();
 
