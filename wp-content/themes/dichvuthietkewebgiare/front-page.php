@@ -19,19 +19,26 @@ $demo_cards = array(
 	array( 'image' => 'education-website-demo-thumbnail.webp', 'tag' => 'Giáo dục', 'title' => 'Mẫu website giáo dục', 'desc' => 'Phù hợp trung tâm đào tạo, khóa học, gia sư, tư vấn du học và tuyển sinh.', 'alt' => 'Mẫu website giáo dục và trung tâm đào tạo' ),
 );
 
-$blog_cards = array(
-	array( 'image' => 'cheap-website-professional-blog-thumbnail.webp', 'title' => 'Website giá rẻ có chuyên nghiệp không?', 'excerpt' => 'Cách nhìn đúng về website chi phí thấp nhưng vẫn rõ thông tin, có CTA và tạo niềm tin.', 'alt' => 'Website giá rẻ có chuyên nghiệp không' ),
-	array( 'image' => 'wordpress-website-preparation-blog-thumbnail.webp', 'title' => 'Làm website WordPress cần chuẩn bị gì?', 'excerpt' => 'Danh sách nội dung, hình ảnh, logo, dịch vụ và thông tin liên hệ nên chuẩn bị trước.', 'alt' => 'Những thứ cần chuẩn bị trước khi làm website WordPress' ),
-	array( 'image' => 'website-design-cost-breakdown-blog-thumbnail.webp', 'title' => 'Chi phí thiết kế website gồm những gì?', 'excerpt' => 'Các khoản thường gặp như giao diện, nội dung, hosting, domain, bảo trì và nâng cấp.', 'alt' => 'Chi phí thiết kế website gồm những khoản nào' ),
+$homepage_posts = new WP_Query(
+	dvtkwgr_real_blog_query_args(
+		array(
+			'post_type'           => 'post',
+			'post_status'         => 'publish',
+			'posts_per_page'      => 3,
+			'ignore_sticky_posts' => true,
+			'no_found_rows'       => true,
+		)
+	)
 );
+$show_homepage_posts = 3 <= (int) $homepage_posts->post_count;
 ?>
 
 <section class="hero image-hero section">
 	<div class="container hero-grid">
 		<div class="hero-copy reveal">
 			<p class="eyebrow"><?php esc_html_e( 'Website WordPress rõ quy trình, dễ quản trị', 'dvtkwgr' ); ?></p>
-			<h1><?php esc_html_e( 'Thiết kế website WordPress giá rẻ cho doanh nghiệp nhỏ', 'dvtkwgr' ); ?></h1>
-			<p class="hero-lead"><?php esc_html_e( 'Giúp cá nhân, cửa hàng và doanh nghiệp nhỏ có website chuyên nghiệp, dễ quản trị, dễ liên hệ khách hàng qua Zalo, điện thoại hoặc form tư vấn.', 'dvtkwgr' ); ?></p>
+			<h1><?php esc_html_e( 'Thiết kế website giá hợp lý cho doanh nghiệp vừa và nhỏ', 'dvtkwgr' ); ?></h1>
+			<p class="hero-lead"><?php esc_html_e( 'Thiết kế website WordPress với chi phí phù hợp, quy trình rõ ràng và dễ quản trị sau bàn giao. Phù hợp cho cá nhân kinh doanh, cửa hàng và doanh nghiệp cần một website chuyên nghiệp để giới thiệu dịch vụ, sản phẩm và tiếp nhận khách hàng tiềm năng.', 'dvtkwgr' ); ?></p>
 			<div class="hero-actions">
 				<a class="btn btn-primary" href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>"><?php esc_html_e( 'Nhận tư vấn miễn phí', 'dvtkwgr' ); ?></a>
 				<a class="btn btn-secondary" href="#bang-gia"><?php esc_html_e( 'Xem bảng giá', 'dvtkwgr' ); ?></a>
@@ -39,11 +46,12 @@ $blog_cards = array(
 			<div class="trust-row" aria-label="<?php esc_attr_e( 'Cam kết dịch vụ', 'dvtkwgr' ); ?>">
 				<span><?php esc_html_e( 'Có demo trước', 'dvtkwgr' ); ?></span>
 				<span><?php esc_html_e( 'Báo giá rõ ràng', 'dvtkwgr' ); ?></span>
-				<span><?php esc_html_e( 'Bàn giao minh bạch', 'dvtkwgr' ); ?></span>
+				<span><?php esc_html_e( 'Bàn giao source code', 'dvtkwgr' ); ?></span>
+				<span><?php esc_html_e( 'Hướng dẫn quản trị', 'dvtkwgr' ); ?></span>
 			</div>
 		</div>
 		<figure class="hero-media reveal">
-			<img src="<?php echo esc_url( dvtkwgr_asset( 'images/landing-page-website-hero-banner.webp' ) ); ?>" alt="<?php esc_attr_e( 'Thiết kế website WordPress giá rẻ cho doanh nghiệp nhỏ', 'dvtkwgr' ); ?>" width="960" height="640" fetchpriority="high" decoding="async">
+			<img src="<?php echo esc_url( dvtkwgr_asset( 'images/landing-page-website-hero-banner.webp' ) ); ?>" alt="<?php esc_attr_e( 'Thiết kế website WordPress cho doanh nghiệp vừa và nhỏ', 'dvtkwgr' ); ?>" width="960" height="640" fetchpriority="high" decoding="async">
 		</figure>
 	</div>
 </section>
@@ -62,12 +70,44 @@ $blog_cards = array(
 	</div>
 </section>
 
+<section class="section section-compact">
+	<div class="container">
+		<div class="section-heading reveal">
+			<p class="eyebrow"><?php esc_html_e( 'Cách chúng tôi làm việc', 'dvtkwgr' ); ?></p>
+			<h2><?php esc_html_e( 'Mô hình làm việc tinh gọn, tập trung vào nhu cầu thực tế', 'dvtkwgr' ); ?></h2>
+			<p><?php esc_html_e( 'Thay vì xây dựng một quy trình phức tạp với nhiều tầng trung gian, dịch vụ tập trung vào việc làm rõ nhu cầu, phạm vi công việc và kết quả bàn giao ngay từ đầu.', 'dvtkwgr' ); ?></p>
+		</div>
+		<div class="card-grid four">
+			<article class="info-card reveal">
+				<span class="card-icon">01</span>
+				<h3><?php esc_html_e( 'Trao đổi trực tiếp', 'dvtkwgr' ); ?></h3>
+				<p><?php esc_html_e( 'Nhu cầu được trao đổi trực tiếp để hạn chế việc thông tin bị sai lệch qua nhiều tầng trung gian.', 'dvtkwgr' ); ?></p>
+			</article>
+			<article class="info-card reveal">
+				<span class="card-icon">02</span>
+				<h3><?php esc_html_e( 'Chỉ triển khai những gì cần thiết', 'dvtkwgr' ); ?></h3>
+				<p><?php esc_html_e( 'Không cố gắng thêm chức năng phức tạp khi doanh nghiệp chưa thật sự cần sử dụng.', 'dvtkwgr' ); ?></p>
+			</article>
+			<article class="info-card reveal">
+				<span class="card-icon">03</span>
+				<h3><?php esc_html_e( 'Chi phí theo phạm vi công việc', 'dvtkwgr' ); ?></h3>
+				<p><?php esc_html_e( 'Báo giá dựa trên loại website, số lượng trang, yêu cầu giao diện và tính năng cần triển khai.', 'dvtkwgr' ); ?></p>
+			</article>
+			<article class="info-card reveal">
+				<span class="card-icon">04</span>
+				<h3><?php esc_html_e( 'Dễ quản trị sau bàn giao', 'dvtkwgr' ); ?></h3>
+				<p><?php esc_html_e( 'Ưu tiên WordPress và cấu trúc quản trị phù hợp để khách hàng có thể chủ động cập nhật những nội dung cơ bản.', 'dvtkwgr' ); ?></p>
+			</article>
+		</div>
+	</div>
+</section>
+
 <section id="bang-gia" class="section section-muted">
 	<div class="container">
 		<div class="section-heading reveal">
 			<p class="eyebrow"><?php esc_html_e( 'Báo giá minh bạch', 'dvtkwgr' ); ?></p>
 			<h2><?php esc_html_e( 'Bảng Giá Dịch Vụ Thiết Kế Website', 'dvtkwgr' ); ?></h2>
-			<p><?php esc_html_e( 'Ba dạng gói dịch vụ phù hợp mọi quy mô doanh nghiệp. Cam kết chất lượng, bàn giao đúng hẹn.', 'dvtkwgr' ); ?></p>
+			<p><?php esc_html_e( 'Các gói dưới đây giúp ước lượng chi phí ban đầu. Phạm vi, nội dung bàn giao và tiến độ sẽ được thống nhất rõ trước khi triển khai.', 'dvtkwgr' ); ?></p>
 		</div>
 		<div class="pricing-board">
 			<article class="pricing-package">
@@ -91,7 +131,7 @@ $blog_cards = array(
 				<a class="btn btn-secondary" href="<?php echo esc_url( add_query_arg( 'goi', 'khoi-nghiep', home_url( '/lien-he/' ) ) ); ?>"><?php esc_html_e( 'Đăng Ký Ngay', 'dvtkwgr' ); ?></a>
 			</article>
 			<article class="pricing-package is-recommended">
-				<div class="package-badge"><?php esc_html_e( 'Được chọn nhiều nhất', 'dvtkwgr' ); ?></div>
+				<div class="package-badge"><?php esc_html_e( 'Phù hợp doanh nghiệp nhỏ', 'dvtkwgr' ); ?></div>
 				<p class="package-kicker"><?php esc_html_e( 'Gói chuyên nghiệp', 'dvtkwgr' ); ?></p>
 				<h3><?php esc_html_e( 'Business Pro', 'dvtkwgr' ); ?></h3>
 				<div class="package-price"><strong>1.990.000</strong><span>đ</span></div>
@@ -99,7 +139,7 @@ $blog_cards = array(
 				<h4><?php esc_html_e( 'Thời gian triển khai: 7-15 ngày', 'dvtkwgr' ); ?></h4>
 				<ul>
 					<li><?php esc_html_e( 'Giao diện theo mẫu, tùy chỉnh theo nhận diện thương hiệu.', 'dvtkwgr' ); ?></li>
-					<li><?php esc_html_e( 'Website chuẩn SEO ngay từ đầu, responsive trên mọi thiết bị.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Cấu trúc SEO nền tảng và giao diện responsive trên các kích thước phổ biến.', 'dvtkwgr' ); ?></li>
 					<li><?php esc_html_e( 'Tối ưu cấu trúc SEO nền tảng: URL, heading, meta, sitemap.', 'dvtkwgr' ); ?></li>
 					<li><?php esc_html_e( 'Sẵn sàng tích hợp SEO và quảng cáo dài hạn.', 'dvtkwgr' ); ?></li>
 					<li><?php esc_html_e( 'Giao diện chuẩn mobile và tablet.', 'dvtkwgr' ); ?></li>
@@ -110,13 +150,13 @@ $blog_cards = array(
 					<li><?php esc_html_e( 'Tích hợp form liên hệ, nút gọi nhanh, Zalo, Messenger.', 'dvtkwgr' ); ?></li>
 					<li><?php esc_html_e( 'Cài đặt SSL bảo mật.', 'dvtkwgr' ); ?></li>
 					<li><?php esc_html_e( 'Hướng dẫn đăng tối ưu 05 bài viết chuẩn SEO.', 'dvtkwgr' ); ?></li>
-					<li><?php esc_html_e( 'Hỗ trợ kỹ thuật 24/7.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Hỗ trợ kỹ thuật sau bàn giao theo phạm vi đã thống nhất.', 'dvtkwgr' ); ?></li>
 				</ul>
 				<a class="btn btn-primary" href="<?php echo esc_url( add_query_arg( 'goi', 'business-pro', home_url( '/lien-he/' ) ) ); ?>"><?php esc_html_e( 'Đăng Ký Ngay', 'dvtkwgr' ); ?></a>
 			</article>
 			<article class="pricing-package">
-				<p class="package-kicker"><?php esc_html_e( 'Gói doanh nghiệp lớn', 'dvtkwgr' ); ?></p>
-				<h3><?php esc_html_e( 'Enterprise', 'dvtkwgr' ); ?></h3>
+				<p class="package-kicker"><?php esc_html_e( 'Gói mở rộng', 'dvtkwgr' ); ?></p>
+				<h3><?php esc_html_e( 'Theo Phạm Vi', 'dvtkwgr' ); ?></h3>
 				<div class="package-price is-contact"><?php esc_html_e( 'Liên Hệ', 'dvtkwgr' ); ?></div>
 				<p class="package-note"><?php esc_html_e( 'Báo giá theo dự án thực tế.', 'dvtkwgr' ); ?></p>
 				<ul>
@@ -128,7 +168,7 @@ $blog_cards = array(
 					<li><?php esc_html_e( 'Tối ưu tốc độ tải trang website.', 'dvtkwgr' ); ?></li>
 					<li><?php esc_html_e( 'Thiết lập form liên hệ, đăng ký nhận tư vấn.', 'dvtkwgr' ); ?></li>
 					<li><?php esc_html_e( 'Cài đặt SSL bảo mật.', 'dvtkwgr' ); ?></li>
-					<li><?php esc_html_e( 'Liên kết Google Map, Facebook và Zalo.', 'dvtkwgr' ); ?></li>
+					<li><?php esc_html_e( 'Liên kết Facebook, Zalo và các kênh liên hệ phù hợp.', 'dvtkwgr' ); ?></li>
 					<li><?php esc_html_e( 'Hỗ trợ thiết lập chiến dịch Facebook/Google Ads.', 'dvtkwgr' ); ?></li>
 					<li><?php esc_html_e( 'Bàn giao source code và tài khoản quản trị.', 'dvtkwgr' ); ?></li>
 				</ul>
@@ -165,6 +205,47 @@ $blog_cards = array(
 			<?php endforeach; ?>
 		</div>
 		<?php endif; ?>
+	</div>
+</section>
+
+<section class="section">
+	<div class="container">
+		<div class="section-heading reveal">
+			<p class="eyebrow"><?php esc_html_e( 'Giá trị bàn giao', 'dvtkwgr' ); ?></p>
+			<h2><?php esc_html_e( 'Một website có thể sử dụng và tiếp tục phát triển', 'dvtkwgr' ); ?></h2>
+		</div>
+		<div class="card-grid three">
+			<article class="info-card reveal">
+				<span class="card-icon">✓</span>
+				<h3><?php esc_html_e( 'Responsive trên nhiều thiết bị', 'dvtkwgr' ); ?></h3>
+				<p><?php esc_html_e( 'Giao diện được kiểm tra trên các kích thước màn hình phổ biến để đảm bảo nội dung và CTA dễ sử dụng.', 'dvtkwgr' ); ?></p>
+			</article>
+			<article class="info-card reveal">
+				<span class="card-icon">✓</span>
+				<h3><?php esc_html_e( 'Quản trị nội dung bằng WordPress', 'dvtkwgr' ); ?></h3>
+				<p><?php esc_html_e( 'Khách hàng có thể cập nhật bài viết, hình ảnh và các nội dung cơ bản sau khi được bàn giao.', 'dvtkwgr' ); ?></p>
+			</article>
+			<article class="info-card reveal">
+				<span class="card-icon">✓</span>
+				<h3><?php esc_html_e( 'Cấu trúc SEO nền tảng', 'dvtkwgr' ); ?></h3>
+				<p><?php esc_html_e( 'Thiết lập cấu trúc heading, URL, metadata và sitemap ở mức phù hợp với phạm vi gói dịch vụ.', 'dvtkwgr' ); ?></p>
+			</article>
+			<article class="info-card reveal">
+				<span class="card-icon">✓</span>
+				<h3><?php esc_html_e( 'Kênh tiếp nhận khách hàng', 'dvtkwgr' ); ?></h3>
+				<p><?php esc_html_e( 'Có thể tích hợp form tư vấn và các kênh liên hệ phù hợp với nhu cầu của website.', 'dvtkwgr' ); ?></p>
+			</article>
+			<article class="info-card reveal">
+				<span class="card-icon">✓</span>
+				<h3><?php esc_html_e( 'Bàn giao rõ ràng', 'dvtkwgr' ); ?></h3>
+				<p><?php esc_html_e( 'Tài khoản và dữ liệu nằm trong phạm vi dự án được bàn giao theo thỏa thuận sau khi dự án hoàn tất.', 'dvtkwgr' ); ?></p>
+			</article>
+			<article class="info-card reveal">
+				<span class="card-icon">✓</span>
+				<h3><?php esc_html_e( 'Hướng dẫn sử dụng cơ bản', 'dvtkwgr' ); ?></h3>
+				<p><?php esc_html_e( 'Hướng dẫn những thao tác quản trị cần thiết để khách hàng có thể vận hành website.', 'dvtkwgr' ); ?></p>
+			</article>
+		</div>
 	</div>
 </section>
 
