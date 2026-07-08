@@ -17,7 +17,14 @@ function dvtkwgr_asset( $path ) {
 }
 
 function dvtkwgr_logo_asset( $file ) {
-	return dvtkwgr_asset( 'images/file%20logo%20chinh%20thuc/' . ltrim( $file, '/' ) );
+	$file = ltrim( $file, '/' );
+	$direct_path = get_theme_file_path( 'assets/images/' . $file );
+
+	if ( file_exists( $direct_path ) ) {
+		return dvtkwgr_asset( 'images/' . $file );
+	}
+
+	return dvtkwgr_asset( 'images/file%20logo%20chinh%20thuc/' . $file );
 }
 
 function dvtkwgr_contact_email() {
