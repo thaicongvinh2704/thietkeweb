@@ -1,344 +1,129 @@
-# Website Status Report - Local WordPress
-
-Audit date: 2026-07-03
-Project path: `C:\xampp\htdocs\thietkeweb`
-Scope: local WordPress source, local database read-only queries, source/config inspection. No files were edited or deleted during the audit, except creating this report. No database writes, migrations, or `wp-config.php` changes were performed.
-
-## 1. Tổng quan project local
-
-- Đây là website WordPress local trong thư mục `C:\xampp\htdocs\thietkeweb`.
-- Local URL trong database: `http://localhost/thietkeweb`.
-- Database local kết nối được bằng read-only `SELECT`.
-- WordPress source version theo `wp-includes/version.php`: `7.0`.
-- CLI environment: PHP `8.2.12`, MariaDB `10.4.32-MariaDB`.
-- Theme active theo database: `dichvuthietkewebgiare`.
-- Plugin active theo database: không có plugin active (`active_plugins = a:0:{}`).
-- Git hiện có thay đổi sẵn ở `wp-content/themes/dichvuthietkewebgiare/functions.php`.
-- `wp-config.php` có tồn tại nhưng không bị Git track theo `git ls-files`; `.cpanel.yml`, `.htaccess`, và theme file đang được track.
-
-## 2. Cấu trúc WordPress
-
-Source có cấu trúc WordPress chuẩn và đủ các thư mục chính:
-
-- `wp-admin`
-- `wp-content`
-- `wp-includes`
-
-Các file root quan trọng có đủ:
-
-- `index.php`
-- `wp-config.php`
-- `.htaccess`
-- `wp-load.php`
-- `wp-settings.php`
-- `wp-login.php`
-- `wp-config-sample.php`
-- các file core WordPress khác như `wp-cron.php`, `xmlrpc.php`, `wp-blog-header.php`.
-
-Trong `wp-content` có:
-
-- `themes`
-- `plugins`
-- `uploads`
-- `languages`
-- `upgrade`
-- `index.php`
-
-`wp-content/uploads` hiện chỉ thấy thư mục `2026/06`, chưa thấy file upload thực tế qua `rg --files wp-content\uploads`.
-
-## 3. Theme hiện tại
-
-Các theme trong `wp-content/themes`:
-
-| Directory | Theme name | Version | Ghi chú |
-|---|---:|---:|---|
-| `dichvuthietkewebgiare` | Dich Vu Thiet Ke Web Gia Re | 1.0.0 | Theme active, custom theme |
-| `twentytwentyfive` | Twenty Twenty-Five | 1.5 | Theme mặc định |
-| `twentytwentyfour` | Twenty Twenty-Four | 1.5 | Theme mặc định |
-| `twentytwentythree` | Twenty Twenty-Three | 1.6 | Theme mặc định |
-| `twentytwentytwo` | Twenty Twenty-Two | 2.1 | Theme mặc định |
-
-Database xác nhận:
-
-- `template = dichvuthietkewebgiare`
-- `stylesheet = dichvuthietkewebgiare`
-
-Theme active là custom theme. `style.css` ghi description: custom WordPress theme cho dịch vụ thiết kế website WordPress tại Việt Nam. Theme không khai báo `Template`, nên không phải child theme.
-
-File theme quan trọng:
-
-- Có: `style.css`, `functions.php`, `header.php`, `footer.php`, `index.php`, `page.php`, `single.php`, `archive.php`, `404.php`, `sidebar.php`, `front-page.php`.
-- Có template/trang riêng: `page-about.php`, `page-contact.php`, `page-tin-tuc.php`, `template-demo-business.php`.
-- `page-gioi-thieu.php` chỉ require `page-about.php`.
-- `page-lien-he.php` chỉ require `page-contact.php`.
-
-Chức năng chính của theme:
-
-- Đăng ký menu `primary`, sidebar blog, custom logo, title tag, thumbnail, HTML5, feed links.
-- Enqueue CSS/JS chính: `assets/css/main.css`, `assets/js/main.js`.
-- Tạo virtual routes: `/tin-tuc/`, `/gioi-thieu/`, `/lien-he/`, `/mau-giao-dien/mau-website-doanh-nghiep/`, `/dvtkwgr-sitemap.xml`, `/robots.txt`.
-- Có SEO tự viết: title profile, meta description, Open Graph, Twitter card, schema JSON-LD, sitemap XML, robots.txt, breadcrumb.
-- Có front page dịch vụ, bảng giá, mẫu giao diện, blog preview, CTA liên hệ.
-- Có mobile menu, sticky CTA mobile, animation reveal, FAQ behavior trong JS.
-
-Lưu ý theme:
-
-- `functions.php` có hook `init` gọi `flush_rewrite_rules(false)` và `update_option('dvtkwgr_rewrite_version', ...)` nếu rewrite version lệch. DB hiện đã có `dvtkwgr_rewrite_version = 20260629.5`, khớp code hiện tại, nên hiện tại không cần flush lại. Tuy nhiên đây vẫn là điểm cần chú ý vì khi đổi version, lần load WordPress đầu tiên sẽ ghi database.
-- `page-contact.php` có form `action="#" method="post"` nhưng không thấy code xử lý submit, nonce, gửi email, hoặc plugin form active. Form này nhiều khả năng chỉ là giao diện, chưa hoạt động thật.
-- Theme đang dùng email/domain/phone placeholder như `contact@dichvuthietkewebgiare.com`, `09xx xxx xxx`, `09xxxxxxxx`.
-
-## 4. Plugin hiện tại
-
-Plugin có trong `wp-content/plugins`:
-
-| Plugin | Version | Main file | Trạng thái |
-|---|---:|---|---|
-| Akismet Anti-spam: Spam Protection | 5.7 | `akismet/akismet.php` | Installed, inactive |
-| Hello Dolly | 1.7.2 | `hello.php` | Installed, inactive |
-
-Database:
-
-- `active_plugins = a:0:{}`.
-
-Phân loại plugin:
-
-- SEO: không có plugin SEO active; không thấy Yoast/Rank Math.
-- Cache: không có.
-- Form: không có.
-- Ecommerce: không có WooCommerce hoặc plugin bán hàng.
-- Page builder: không có Elementor/page builder active.
-- Security: không có plugin security hardening active. Akismet là anti-spam nhưng inactive.
-- SMTP: không có.
-- Custom plugin: không thấy custom plugin riêng.
-
-Plugin có thể ảnh hưởng mạnh nếu được active:
-
-- Akismet có thể ảnh hưởng comment/form spam checking, gọi API bên ngoài, thêm JS/frontend logic và redirect trong admin khi cấu hình. Hiện inactive nên không ảnh hưởng runtime.
-- Hello Dolly không ảnh hưởng giao diện frontend đáng kể và hiện inactive.
-
-## 5. Cấu hình wp-config.php và database local
-
-Thông tin đọc từ `wp-config.php` theo dạng an toàn:
-
-- `DB_NAME = thietkeweb`
-- `DB_USER = root`
-- `DB_HOST = localhost`
-- `DB_PASSWORD = [hidden]`
-- `DB_CHARSET = utf8mb4`
-- `DB_COLLATE = ''`
-- `table_prefix = wp_`
-- `WP_DEBUG = false`
-- `WP_HOME`: không define trong `wp-config.php`
-- `WP_SITEURL`: không define trong `wp-config.php`
-- Auth keys/salts: `[hidden]`
-
-Database local truy cập được bằng `C:\xampp\mysql\bin\mysql.exe` qua host `127.0.0.1`, database `thietkeweb`, user `root`, chỉ chạy truy vấn `SELECT`.
-
-Option quan trọng:
-
-| Option | Value |
-|---|---|
-| `siteurl` | `http://localhost/thietkeweb` |
-| `home` | `http://localhost/thietkeweb` |
-| `template` | `dichvuthietkewebgiare` |
-| `stylesheet` | `dichvuthietkewebgiare` |
-| `active_plugins` | `a:0:{}` |
-| `permalink_structure` | `/%year%/%monthnum%/%day%/%postname%/` |
-| `show_on_front` | `page` |
-| `page_on_front` | `6` |
-| `page_for_posts` | `9` |
-| `WPLANG` | `vi` |
-
-Post count theo database:
-
-| post_type | post_status | count |
-|---|---|---:|
-| `page` | publish | 5 |
-| `page` | draft | 1 |
-| `post` | publish | 1 |
-| `post` | auto-draft | 1 |
-| `nav_menu_item` | publish | 4 |
-| `wp_navigation` | publish | 1 |
-
-Lưu ý:
-
-- `blogname` và `blogdescription` đang rỗng trong `wp_options`.
-- Front page là page ID `6`; posts page là page ID `9`.
-
-## 6. Local URL / siteurl / home
-
-- `siteurl` và `home` đều là `http://localhost/thietkeweb`, phù hợp môi trường local.
-- `WP_HOME` và `WP_SITEURL` không bị hardcode trong `wp-config.php`, nên WordPress lấy URL từ database.
-- Các GUID/content trong `wp_posts` đang dùng local URL `http://localhost/thietkeweb`.
-- Không thấy option redirect trong database ngoài `home` và `siteurl`.
-- Không thấy domain `dichvuthietkewebgiare.com` trong `wp_options`, `wp_posts`, hoặc `wp_postmeta`.
-- Chưa thấy dấu hiệu database redirect sai từ local sang domain live.
-
-Tôi không mở trang qua HTTP/curl để render runtime vì theme có code có thể ghi database khi rewrite version lệch. Yêu cầu audit là không thay đổi database, nên phần runtime browser chưa được kiểm chứng.
-
-## 7. .htaccess và permalink
-
-`.htaccess` hiện là rule WordPress chuẩn:
-
-- Có `RewriteEngine On`.
-- Có rule preserve `HTTP_AUTHORIZATION`.
-- Có rule bỏ qua `index.php`.
-- Có điều kiện `REQUEST_FILENAME !-f` và `!-d`.
-- Rewrite về `index.php`.
-
-Không thấy:
-
-- Rule ép HTTPS.
-- Rule ép domain live.
-- Rule redirect lạ.
-- Rule hardcode `HTTP_HOST`.
-
-Permalink trong DB: `/%year%/%monthnum%/%day%/%postname%/`.
-
-## 8. URL hardcode hoặc URL cũ phát hiện
-
-Trong custom theme `dichvuthietkewebgiare`:
-
-- `style.css` có `Theme URI` và `Author URI`: `https://dichvuthietkewebgiare.com`.
-- `functions.php` có schema context `https://schema.org`.
-- `functions.php` có email schema `contact@dichvuthietkewebgiare.com`.
-- `footer.php` và `page-contact.php` có email `contact@dichvuthietkewebgiare.com`.
-- `footer.php` có Zalo placeholder `https://zalo.me/09xxxxxxxx`.
-- `style.css` có GPL license URL.
-
-Các URL này không phải redirect local sang live. Navigation/runtime URL chính trong theme chủ yếu dùng `home_url()` và `get_template_directory_uri()`.
-
-Trong plugin:
-
-- Akismet có nhiều URL `https://akismet.com`, `https://rest.akismet.com`, WordPress.org, font/CDN URL. Plugin đang inactive.
-- Hello Dolly có plugin/author URL metadata.
-
-Trong database:
-
-- `wp_options`: 7 option có URL, gồm `siteurl`, `home`, `ping_sites`, browser/update transient.
-- `wp_posts`: 13 dòng có local URL trong GUID/content.
-- `wp_postmeta`: 0 dòng có URL theo pattern kiểm tra.
-- `dichvuthietkewebgiare.com`: 0 trong options/posts/postmeta.
-
-Không phát hiện URL cũ/live domain trong database theo các query đã chạy.
-
-## 9. Vấn đề kỹ thuật phát hiện
-
-Kết quả PHP lint:
-
-- Đã kiểm tra toàn bộ `1587` file PHP trong project.
-- Không phát hiện lỗi syntax PHP bằng `php -l`.
-- Đã kiểm tra riêng active theme/plugins và root PHP files; cũng không có lỗi lint.
-
-Duplicate function:
-
-- Không thấy duplicate global function rõ ràng trong custom theme.
-- Một số tên method/function như `init`, `execute`, `get_config`, `get_stats` lặp trong Akismet class/method context; đây là pattern plugin bình thường, không phải lỗi fatal duplicate function.
-
-Rủi ro/điểm cần chú ý:
-
-- Theme có `flush_rewrite_rules(false)` + `update_option()` trên `init` khi rewrite version đổi. Nên cân nhắc chuyển logic flush sang activation/admin action rõ ràng hơn nếu tiếp tục phát triển.
-- Contact form hiện không có backend xử lý submit, không có SMTP/plugin form active.
-- `blogname` và `blogdescription` đang rỗng; theme có fallback site name nhưng cấu hình WordPress/SEO nền tảng chưa đầy đủ.
-- `functions.php` đang có diff chưa commit: tăng rewrite version, thêm site name fallback, SEO profiles, canonical/social meta, sitemap/robots.
-- `.cpanel.yml` có deploy path `/home/mgrgffc/public_html/`; đây là dấu hiệu có cấu hình deploy live/cPanel, nhưng không ảnh hưởng local nếu không chạy deploy.
-- `.cpanel.yml` không copy `wp-config.php`, chỉ copy `wp-config-sample.php`; điểm này tốt hơn cho bảo mật khi deploy, nhưng vẫn cần rà soát quy trình live riêng.
-- Không runtime-test bằng browser/curl để tránh khả năng ghi DB ngoài ý muốn.
-
-## 10. SEO hiện tại trong source
-
-SEO trong theme:
-
-- `add_theme_support('title-tag')`: có.
-- Custom document title: có qua filter `pre_get_document_title`.
-- Meta description: có qua `wp_head`, bỏ qua nếu Yoast hoặc Rank Math tồn tại.
-- Canonical: custom canonical chỉ in khi đang ở virtual page. Cần kiểm tra thêm canonical cho homepage/singular/archive khi runtime.
-- Open Graph: có `og:type`, `og:title`, `og:description`, `og:url`, `og:site_name`, `og:image`.
-- Twitter card: có.
-- Schema JSON-LD: có cho front page, type `ProfessionalService`.
-- Breadcrumb: có function `dvtkwgr_breadcrumb()` và được gọi ở page/archive/single/index/contact/about/tin-tuc.
-- Sitemap custom: có `/dvtkwgr-sitemap.xml`.
-- Robots custom: có route `/robots.txt` và filter `robots_txt`.
-- SEO plugin: không có plugin active.
-
-Điểm cần chú ý SEO:
-
-- `blogname` rỗng trong DB, nên nên đặt tên site thật trong Settings.
-- Không có SEO plugin active; SEO đang phụ thuộc vào code custom trong theme.
-- Canonical custom chưa bao phủ mọi loại trang.
-- Nếu sau này bật Yoast/Rank Math, theme đã có guard cho meta description và social meta, nhưng vẫn cần test tránh trùng tag.
-
-## 11. Responsive / giao diện
-
-CSS/JS chính:
-
-- `wp-content/themes/dichvuthietkewebgiare/assets/css/main.css`
-- `wp-content/themes/dichvuthietkewebgiare/assets/js/main.js`
-
-Theme có dấu hiệu responsive rõ:
-
-- Có viewport meta trong `header.php`.
-- CSS dùng custom CSS, grid/flex layout, container width responsive.
-- Có media queries tại các breakpoint như `max-width: 1100px`, `860px`, `700px`, `782px`, `560px`.
-- Có `@media (prefers-reduced-motion: reduce)`.
-- Không thấy Bootstrap, Tailwind, Elementor.
-- Có style cho mobile menu, mobile sticky CTA, card grids, pricing/demo grids, contact layout, footer layout.
-- JS xử lý mobile menu, header scrolled state, reveal animation bằng `IntersectionObserver`, FAQ accordion.
-
-Các file assets đáng kiểm tra tiếp nếu QA giao diện:
-
-- `assets/css/main.css`
-- `assets/js/main.js`
-- `front-page.php`
-- `page-contact.php`
-- `page-about.php`
-- `page-tin-tuc.php`
-- `template-demo-business.php`
-- ảnh trong `assets/images/` và `assets/images/templates/business/`.
-
-## 12. Rủi ro cần chú ý
-
-1. Contact form chưa có xử lý thật, có thể gây hiểu nhầm là đã gửi được yêu cầu.
-2. Theme có logic ghi DB khi rewrite version đổi; cần cẩn trọng khi chỉ muốn audit hoặc khi deploy.
-3. Không có plugin SEO/form/cache/security/SMTP active; toàn bộ chức năng SEO/form hiện phụ thuộc theme hoặc chưa có.
-4. `blogname`/`blogdescription` rỗng, ảnh hưởng title/site identity nếu fallback không đủ.
-5. `functions.php` đang có thay đổi chưa commit, cần xác nhận đây là thay đổi mong muốn.
-6. Có `.cpanel.yml` deploy live path; nếu chạy deploy, cần quy trình riêng để không đưa sai trạng thái local lên live.
-7. `uploads` không có media file thực tế; nếu nội dung cần ảnh từ media library thì hiện chưa đủ.
-8. Không runtime-test frontend để giữ đúng yêu cầu không thay đổi database.
-
-## 13. Việc nên làm tiếp theo
-
-1. Backup database và source trước khi sửa bất cứ thứ gì.
-2. Đặt `blogname` và `blogdescription` trong WordPress Settings.
-3. Xác nhận `functions.php` diff hiện tại có phải thay đổi mong muốn không, sau đó commit hoặc tiếp tục review.
-4. Chuyển logic `flush_rewrite_rules()` sang activation/manual admin task nếu muốn tránh ghi DB trên `init`.
-5. Làm contact form thật: dùng plugin form + SMTP hoặc viết handler có nonce, validation, sanitization, email/log rõ ràng.
-6. Quyết định dùng SEO custom trong theme hay cài SEO plugin; nếu giữ custom SEO, bổ sung canonical cho mọi loại trang cần SEO.
-7. Khi được phép runtime-test, mở local site và kiểm tra homepage, `/gioi-thieu/`, `/lien-he/`, `/tin-tuc/`, sitemap, robots, mobile menu.
-8. Nếu chuẩn bị deploy live, cần audit riêng live URL, search/replace database, `.cpanel.yml`, SSL/domain, SMTP và cache.
-
-## 14. Thông tin cần hỏi thêm từ chủ website
-
-- Domain live chính xác là gì?
-- Tên website chính thức, tagline, số điện thoại, Zalo, email nhận form là gì?
-- Contact form cần gửi email, lưu database, gửi CRM, hay chỉ chuyển Zalo?
-- Website có cần bán hàng/WooCommerce không?
-- Có muốn dùng SEO plugin như Yoast/Rank Math hay giữ SEO custom trong theme?
-- Nội dung hiện tại là demo hay đã là nội dung cuối?
-- Có cần deploy qua `.cpanel.yml` không, hay chỉ chạy local?
-- Có dữ liệu media/upload thật ở nơi khác chưa?
-- Có yêu cầu bảo mật/admin user/plugin nào cho bản live không?
-
-## Tóm tắt 10 dòng copy nhanh
-
-1. Project là WordPress local tại `C:\xampp\htdocs\thietkeweb`, source core đủ `wp-admin`, `wp-content`, `wp-includes`.
-2. Database local kết nối được read-only; `siteurl` và `home` đều là `http://localhost/thietkeweb`.
-3. Theme active là custom theme `dichvuthietkewebgiare`, version `1.0.0`.
-4. Plugin installed chỉ có Akismet và Hello Dolly; không có plugin nào active.
-5. `wp-config.php`: DB `thietkeweb`, user `root`, host `localhost`, password `[hidden]`, prefix `wp_`, `WP_DEBUG=false`.
-6. `.htaccess` là rule WordPress chuẩn, không thấy ép HTTPS, ép domain live, hoặc redirect lạ.
-7. Không thấy domain live trong database; `dichvuthietkewebgiare.com` chỉ nằm trong source theme/email metadata.
-8. SEO được viết trong theme: title, meta description, OG/Twitter, schema, breadcrumb, sitemap/robots; chưa có SEO plugin active.
-9. Đã lint toàn bộ `1587` file PHP, không có lỗi syntax; rủi ro chính là form liên hệ chưa xử lý và theme có thể flush rewrite khi version đổi.
-10. Ưu tiên tiếp theo: đặt site name/tagline, xử lý form thật, review diff `functions.php`, QA frontend khi được phép load site, rồi mới tính deploy/live URL.
+# BÁO CÁO TRẠNG THÁI WEBSITE
+
+Ngày cập nhật: 15/07/2026  
+Phạm vi: Thiết kế lại toàn bộ trang chủ WordPress cho `dichvuthietketrangweb.com`
+
+## 1. Trạng thái tổng quan
+
+- Đã hoàn thành code trang chủ mới trong child theme, không ghi thêm thay đổi vào parent theme đang có dữ liệu chưa commit.
+- Đã kích hoạt theme `dichvuthietkewebgiare-child`; parent theme là `dichvuthietkewebgiare`.
+- Trang chủ local trả HTTP 200 và chỉ nạp CSS/JavaScript riêng khi `is_front_page()` là `true`.
+- Hình raster trên trang chủ đều lấy từ `wp-content/themes/dichvuthietkewebgiare/assets/images/`; không hotlink ảnh ngoài và không tạo ảnh demo AI mới.
+- Đã áp dụng hướng dẫn `ui-ux-pro-max`: màu xanh/cam thương hiệu, bố cục dịch vụ B2B thực dụng, radius 10–14px, shadow nhẹ, tap target tối thiểu 44px, focus-visible, reduced motion và chuyển động ngắn có mục đích.
+
+### Cập nhật header nổi bật hơn — 15/07/2026
+
+- Đã bỏ hoàn toàn phương án Swiss hai tầng trước đó sau khi người dùng đánh giá chưa đạt thẩm mỹ.
+- Hướng mới tham khảo nhịp thị giác của header tại `https://thuythu.vn/thiet-ke-web/`: nền tối nổi bật ở trạng thái đầu trang, menu uppercase một hàng, khoảng trắng rộng và chuyển sang nền trắng/chiều cao gọn khi cuộn. Chỉ lấy ý tưởng bố cục; không sao chép logo, nội dung, class hoặc source của Thủy Thủ.
+- Đã loại bỏ utility bar, khung logo nền nhạt, viền trái và chỉ số menu 01–06 để header nhẹ, rõ và tập trung hơn.
+- Logo chuyển sang asset nội bộ `10-logo-icon-transparent-512x512.png` kết hợp wordmark HTML “Dịch Vụ / Thiết Kế Trang Web”; icon có khung 72×72px và chữ thương hiệu 21px trên desktop, nên sắc nét và lớn hơn rõ rệt.
+- Header desktop cao 104px ở đầu trang, nền xanh đậm, chữ trắng; khi cuộn còn 78px, nền trắng, chữ xanh đậm và shadow nhẹ.
+- Menu còn sáu nhóm chính, font 13px đậm/uppercase, active và hover dùng gạch cam 2px; CTA “Báo giá dự án” dạng pill có nút mũi tên tròn.
+- Dịch vụ dùng mega menu toàn chiều rộng với bốn ảnh lấy từ asset nội bộ, có mở bằng click/hover, ArrowDown, Escape và điều hướng bàn phím.
+- Mobile/tablet chuyển sang nút Menu tối thiểu 48px và drawer xanh đậm toàn chiều cao; có overlay, focus trap, khóa cuộn, ESC và submenu dạng lưới 2×2.
+- Header mới áp dụng thống nhất cho trang chủ và các trang con qua child theme.
+
+## 2. File đã tạo hoặc sửa
+
+### File mới trong child theme
+
+- `wp-content/themes/dichvuthietkewebgiare-child/style.css`
+- `wp-content/themes/dichvuthietkewebgiare-child/functions.php`
+- `wp-content/themes/dichvuthietkewebgiare-child/header.php`
+- `wp-content/themes/dichvuthietkewebgiare-child/front-page.php`
+- `wp-content/themes/dichvuthietkewebgiare-child/assets/css/header.css`
+- `wp-content/themes/dichvuthietkewebgiare-child/assets/css/header.min.css`
+- `wp-content/themes/dichvuthietkewebgiare-child/assets/css/homepage.css`
+- `wp-content/themes/dichvuthietkewebgiare-child/assets/css/homepage.min.css`
+- `wp-content/themes/dichvuthietkewebgiare-child/assets/js/header.js`
+- `wp-content/themes/dichvuthietkewebgiare-child/assets/js/homepage.js`
+
+### File báo cáo đã cập nhật
+
+- `WEBSITE_STATUS_REPORT.md`
+
+### Dữ liệu WordPress local đã thay đổi
+
+- Active stylesheet: `dichvuthietkewebgiare-child`
+- Parent template: `dichvuthietkewebgiare`
+
+## 3. Thành phần đã hoàn thiện
+
+1. Header được override hoàn toàn trong child theme theo hướng agency editorial: wordmark lớn, nền xanh đậm đầu trang, sticky chuyển nền trắng, mega menu có ảnh và drawer mobile.
+2. Hero hai cột 45/55, một H1, hai CTA, bốn trust point và ảnh `homepage-web-design-hero.webp` có preload/fetch priority cao.
+3. Dải liên hệ nhanh nền xanh đậm với email thật và CTA đến form.
+4. Section sáu lợi ích với ảnh `website-business-growth.webp` và icon SVG inline.
+5. Grid sáu dịch vụ 3x2 desktop, một cột mobile, chiều cao đồng đều và hover tối đa 4px.
+6. Carousel kho mẫu dùng native scroll-snap, nút previous/next, pagination dots, autoplay 5,2 giây, pause khi hover/focus/tab ẩn và hỗ trợ swipe tự nhiên.
+7. Grid sáu lý do sử dụng đầy đủ sáu ảnh `reason-*.webp`, tỷ lệ 3:2 và zoom tối đa 1.03.
+8. Tám tab chất lượng dùng đầy đủ `quality-*.webp`, có `tablist/tab/tabpanel`, ArrowUp/ArrowDown/ArrowLeft/ArrowRight, Home/End và horizontal scroll-snap trên mobile.
+9. Bảng giá ba gói thật: Khởi Nghiệp 990.000 đ, Business Pro 1.990.000 đ và Theo Phạm Vi/ Liên hệ. Gói Business Pro được đánh dấu rõ và đưa lên trước trên mobile.
+10. Timeline tám bước, desktop 4x2, mobile dọc, có animation đường nối và reveal một lần.
+11. Khối số liệu nền xanh chỉ dùng thông tin không phóng đại: 100% bàn giao rõ phạm vi, responsive đa thiết bị, hỗ trợ online toàn quốc. Counter chỉ áp dụng cho số 100 và chạy một lần khi vào viewport.
+12. Section dự án dùng tiêu đề trung thực “Một số giao diện và dự án mẫu”; không thêm logo, lời chứng thực hoặc số liệu khách hàng giả.
+13. Form tư vấn hai cột desktop/một cột mobile, label luôn hiển thị, có nonce, honeypot, lọc dữ liệu server, consent, validation khi blur/submit, loading/success/error và `aria-live`.
+14. FAQ tám câu, chỉ mở một câu tại một thời điểm, có `aria-expanded`, `aria-controls` và animation Web Animations API không dùng max-height lớn.
+15. Footer trang chủ được đưa về bốn cột bằng CSS có phạm vi `body.home`; các trang khác giữ cấu trúc parent theme.
+16. Back-to-top và thanh liên hệ cố định mobile hiện có được giữ, không dùng hiệu ứng rung liên tục.
+17. SEO: một H1; heading H2/H3 theo cấp; canonical, description, Open Graph/Twitter dùng ảnh hero có thật; thêm một schema `Service` và một schema `FAQPage`; loại bỏ schema homepage cũ bị trùng.
+18. Hiệu suất: 22/24 ảnh dùng lazy loading; ảnh hero tải ưu tiên; ảnh có width/height; JavaScript defer; không tải slider/animation từ CDN; CSS production đã minify.
+
+## 4. Kết quả kiểm thử
+
+### Kiểm thử tự động/local đã đạt
+
+- PHP lint: toàn bộ file PHP của parent theme và child theme không có syntax error.
+- JavaScript: `main.js`, `homepage.js` và `header.js` qua `node --check`.
+- HTTP: trang chủ, giới thiệu, liên hệ, tin tức và demo doanh nghiệp đều trả HTTP 200 sau khi kích hoạt child theme.
+- Asset trang chủ: kiểm tra 28 URL CSS/JS/ảnh/icon, 0 lỗi 404.
+- Sau cập nhật header theo Thủy Thủ: kiểm tra 31 asset CSS/JS/ảnh/icon trên trang chủ, 0 lỗi 404; trang chủ, giới thiệu, liên hệ và tin tức đều trả HTTP 200.
+- Header HTML: một navigation chính, một nút mobile có `aria-controls`, mega menu có `aria-expanded`/`aria-controls` khớp ID và CTA là liên kết thật đến form tư vấn.
+- Header production: `header.min.css` đã tạo lại, không có token minify lỗi; `header.php` qua PHP lint và `header.js` qua `node --check`.
+- HTML trang chủ: 1 H1, 8 tab, 8 bước quy trình, 8 FAQ.
+- Schema: 1 `Service`, 1 `FAQPage`.
+- Form: đã mô phỏng dữ liệu hợp lệ với `wp_mail` được chặn trong test; luồng chuyển hướng thành công về `/?home_contact=success#tu-van`. Không gửi email thật trong quá trình kiểm thử.
+- CSS homepage production: `homepage.min.css` được tạo và đang được enqueue.
+- Ảnh raster ngoài asset trong template homepage: 0.
+
+### Responsive đã triển khai trong code
+
+- Desktop lớn: bố cục container tối đa 1240px.
+- 1024px: carousel 2 item, grid dịch vụ/lý do 2 cột, bảng giá chuyển theo không gian khả dụng.
+- Header chuyển sang drawer từ 1100px; wordmark vẫn giữ 19px trên tablet và 15px trên màn hình nhỏ, nút Menu 48–50px.
+- 768px: hero, form, dự án và FAQ chuyển một cột; quality tabs cuộn ngang; timeline chuyển dọc.
+- 576px: CTA full width, card và form giảm padding, carousel 1 item.
+- 390px: gutter 14px mỗi bên, body vẫn 16px, trust point 2x2, timeline thu gọn nhưng giữ tap target.
+- CSS có `overflow-x` được kiểm soát, ảnh có tỷ lệ/kích thước, pricing không dùng carousel và form không giữ hai cột trên mobile.
+
+### Giới hạn nghiệm thu hình ảnh
+
+- Đã render ảnh local bằng Chrome headless để kiểm tra trạng thái đầu trang ở desktop 1440px và viewport hẹp; desktop xác nhận logo/wordmark, menu, CTA và hero không va chạm.
+- Browser tích hợp của môi trường vẫn trả danh sách browser rỗng, nên chưa thể kiểm tra tương tác trực tiếp, computed style, console hoặc chụp đủ trạng thái mega menu/drawer/sticky theo ma trận 1440/1024/768/390.
+- Responsive còn lại được xác nhận thêm bằng code review breakpoint và HTTP/asset check; chưa có bộ visual regression tự động.
+
+## 5. Dữ liệu thật còn thiếu
+
+- Chưa có số điện thoại công khai đã xác minh.
+- Chưa có URL Zalo đã xác minh.
+- Chưa có logo khách hàng được phép sử dụng.
+- Chưa có case study/dự án khách hàng thật kèm tên, ngành nghề, phạm vi và link website.
+- Asset hiện chỉ có năm screenshot của cùng một bộ demo doanh nghiệp; chưa đủ 6–10 screenshot đa ngành như yêu cầu ban đầu.
+- Không có Contact Form 7, WPForms hoặc plugin form khác đang active; child theme dùng handler WordPress có nonce và `wp_mail`.
+- Chưa có cấu hình SMTP/reCAPTCHA trong plugin để kiểm tra giao nhận email production và captcha.
+
+## 6. Điểm chưa thể khớp hoàn toàn với trang tham chiếu
+
+- Không sao chép số liệu, logo, tên khách hàng, nội dung hoặc ảnh từ Phương Nam Vina; các phần đó được thay bằng dữ liệu có thể xác minh hoặc mô tả trung thực.
+- Riêng header chỉ tham khảo cấu trúc fixed/sticky, tỷ lệ logo–menu và cách đổi nền khi cuộn của Thủy Thủ; toàn bộ nhận diện xanh/cam, wordmark, ảnh mega menu và nội dung đều dùng dữ liệu/asset của website local.
+- Kho mẫu hiện có 5 trang thuộc một demo doanh nghiệp, chưa có đủ nội dung đa ngành để đạt mật độ 6–10 dự án thật.
+- Header chưa hiển thị nút gọi và floating action chưa có nút Zalo vì chưa có số điện thoại/URL thật.
+- Chưa thể đo computed style, easing và chụp so sánh đầy đủ các trạng thái tương tác do browser tích hợp không khả dụng.
+- Chưa chạy Lighthouse và chưa xác nhận điểm Performance/Accessibility/Best Practices/SEO bằng browser; các yêu cầu nền tảng đã được triển khai trong code nhưng cần đo lại khi có Chrome/Playwright.
+
+## 7. Việc nên làm khi có dữ liệu hoặc browser
+
+1. Bổ sung số điện thoại và URL Zalo thật, sau đó thay email/Facebook trong thanh liên hệ mobile theo yêu cầu.
+2. Bổ sung 6–10 screenshot dự án thật hoặc demo đa ngành có quyền sử dụng.
+3. Cấu hình SMTP và reCAPTCHA/plugin form nếu cần, sau đó gửi thử đến hộp thư thật.
+4. Chụp full-page 1440px, 1024px, 768px và 390px; kiểm tra console/network/keyboard/reduced-motion và chỉnh spacing nếu có lệch trực quan.
+5. Chạy Lighthouse mobile và tối ưu tiếp nếu bất kỳ chỉ số nào thấp hơn mục tiêu.
