@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'DVTKWGR_VERSION', '1.0.3' );
+define( 'DVTKWGR_VERSION', '1.0.4' );
 define( 'DVTKWGR_REWRITE_VERSION', '20260629.5' );
 
 function dvtkwgr_asset( $path ) {
@@ -28,7 +28,7 @@ function dvtkwgr_logo_asset( $file ) {
 }
 
 function dvtkwgr_home_banner_asset() {
-	return dvtkwgr_asset( 'images/office-people-working-centered-logo.webp' );
+	return dvtkwgr_asset( 'images/file%20anh%20chinh%20thuc/hero-professional-agency-office.webp' );
 }
 
 function dvtkwgr_contact_email() {
@@ -197,8 +197,8 @@ add_filter( 'template_include', 'dvtkwgr_virtual_route_template' );
 function dvtkwgr_seo_profiles() {
 	return array(
 		'home'                       => array(
-			'title'       => 'Thiết kế website giá hợp lý cho doanh nghiệp vừa và nhỏ',
-			'description' => 'Dịch vụ thiết kế website WordPress với chi phí phù hợp, quy trình rõ ràng, có demo trước và dễ quản trị sau bàn giao.',
+			'title'       => 'Thiết kế website chuyên nghiệp cho doanh nghiệp vừa và nhỏ',
+			'description' => 'Dịch vụ thiết kế website WordPress chuyên nghiệp, chuẩn mobile, dễ quản trị, có form tư vấn và quy trình bàn giao rõ ràng cho doanh nghiệp vừa và nhỏ.',
 			'url'         => home_url( '/' ),
 			'image'       => dvtkwgr_home_banner_asset(),
 		),
@@ -388,17 +388,49 @@ function dvtkwgr_schema_json_ld() {
 		'image'       => $profile['image'],
 		'areaServed'  => 'Việt Nam',
 		'email'       => dvtkwgr_contact_email(),
-		'telephone'   => '09xx xxx xxx',
 		'priceRange'  => '₫₫',
 		'sameAs'      => array( dvtkwgr_facebook_url() ),
 		'serviceType' => array(
-			'Thiết kế website WordPress giá rẻ',
+			'Thiết kế website WordPress chuyên nghiệp',
 			'Landing page dịch vụ',
 			'Website doanh nghiệp nhỏ',
 		),
 	);
 
 	echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+
+	$faq_schema = array(
+		'@context'   => 'https://schema.org',
+		'@type'      => 'FAQPage',
+		'mainEntity' => array(
+			array(
+				'@type'          => 'Question',
+				'name'           => 'Thiết kế website cần chuẩn bị những gì?',
+				'acceptedAnswer' => array(
+					'@type' => 'Answer',
+					'text'  => 'Bạn nên chuẩn bị logo, thông tin doanh nghiệp, danh sách dịch vụ hoặc sản phẩm, hình ảnh thực tế, thông tin liên hệ và một vài website tham khảo nếu có.',
+				),
+			),
+			array(
+				'@type'          => 'Question',
+				'name'           => 'Website có dễ tự chỉnh sửa không?',
+				'acceptedAnswer' => array(
+					'@type' => 'Answer',
+					'text'  => 'Website được xây dựng trên WordPress nên khách hàng có thể tự cập nhật bài viết, hình ảnh và một số nội dung cơ bản sau khi được hướng dẫn.',
+				),
+			),
+			array(
+				'@type'          => 'Question',
+				'name'           => 'Có được xem demo trước khi bàn giao không?',
+				'acceptedAnswer' => array(
+					'@type' => 'Answer',
+					'text'  => 'Có. Khách hàng được xem bản demo để góp ý trong phạm vi đã thống nhất trước khi hoàn thiện và bàn giao.',
+				),
+			),
+		),
+	);
+
+	echo '<script type="application/ld+json">' . wp_json_encode( $faq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
 }
 add_action( 'wp_head', 'dvtkwgr_schema_json_ld' );
 
@@ -609,10 +641,14 @@ function dvtkwgr_breadcrumb() {
 
 function dvtkwgr_primary_menu_fallback() {
 	$items = array(
-		'Trang chủ'  => home_url( '/' ),
-		'Giới thiệu' => home_url( '/gioi-thieu/' ),
-		'Tin tức'   => home_url( '/tin-tuc/' ),
-		'Liên hệ'   => home_url( '/lien-he/' ),
+		'Trang chủ'              => home_url( '/' ),
+		'Dịch vụ'                => home_url( '/#dich-vu' ),
+		'Mẫu website'            => home_url( '/#mau-website' ),
+		'Bảng giá'               => home_url( '/#bang-gia' ),
+		'Quy trình'              => home_url( '/#quy-trinh' ),
+		'Câu hỏi thường gặp'     => home_url( '/#faq' ),
+		'Tin tức'                => home_url( '/tin-tuc/' ),
+		'Liên hệ'                => home_url( '/lien-he/' ),
 	);
 	echo '<ul id="primary-menu" class="menu">';
 	foreach ( $items as $label => $url ) {
