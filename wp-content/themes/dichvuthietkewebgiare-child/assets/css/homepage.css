@@ -479,6 +479,12 @@ body.home {
 	box-shadow: 0 10px 24px rgba(15, 42, 75, 0.06);
 }
 
+.hp-portfolio-link {
+	display: block;
+	color: inherit;
+	text-decoration: none;
+}
+
 .hp-browser {
 	display: flex;
 	align-items: center;
@@ -508,22 +514,21 @@ body.home {
 .hp-screenshot {
 	position: relative;
 	overflow: hidden;
-	height: 420px;
+	aspect-ratio: 1440 / 1100;
 	background: #e7edf5;
 }
 
 .hp-screenshot img {
 	width: 100%;
-	height: auto;
-	min-height: 100%;
+	height: 100%;
 	object-fit: cover;
-	object-position: top;
-	transition: transform 7.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+	object-position: top center;
+	transition: transform 0.35s ease;
 }
 
 .hp-portfolio-card:hover .hp-screenshot img,
 .hp-portfolio-card:focus-within .hp-screenshot img {
-	transform: translateY(calc(-100% + 420px));
+	transform: scale(1.035);
 }
 
 .hp-portfolio-meta {
@@ -540,6 +545,26 @@ body.home {
 
 .hp-portfolio-meta h3 {
 	margin: 6px 0 0;
+}
+
+.hp-portfolio-meta strong {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	margin-top: 14px;
+	color: var(--hp-primary);
+	font-size: 14px;
+}
+
+.hp-portfolio-meta strong svg {
+	width: 17px;
+	height: 17px;
+	transition: transform 0.2s ease;
+}
+
+.hp-portfolio-link:hover .hp-portfolio-meta strong svg,
+.hp-portfolio-link:focus-visible .hp-portfolio-meta strong svg {
+	transform: translateX(3px);
 }
 
 .hp-carousel-dots {

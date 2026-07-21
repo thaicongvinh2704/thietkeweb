@@ -53,11 +53,9 @@ $services = array(
 );
 
 $portfolio = array(
-	array( 'file' => 'mau-website-doanh-nghiep-trang-chu.webp', 'width' => 920, 'height' => 1709, 'title' => 'Trang chủ doanh nghiệp', 'tag' => 'Giao diện mẫu' ),
-	array( 'file' => 'mau-website-doanh-nghiep-gioi-thieu.webp', 'width' => 958, 'height' => 1642, 'title' => 'Trang giới thiệu năng lực', 'tag' => 'Giao diện mẫu' ),
-	array( 'file' => 'mau-website-doanh-nghiep-dich-vu.webp', 'width' => 938, 'height' => 1676, 'title' => 'Trang trình bày dịch vụ', 'tag' => 'Giao diện mẫu' ),
-	array( 'file' => 'mau-website-doanh-nghiep-lien-he.webp', 'width' => 958, 'height' => 1642, 'title' => 'Trang liên hệ tư vấn', 'tag' => 'Giao diện mẫu' ),
-	array( 'file' => 'mau-website-doanh-nghiep-thumbnail.webp', 'width' => 1024, 'height' => 1536, 'title' => 'Bộ giao diện doanh nghiệp', 'tag' => 'WordPress demo' ),
+	array( 'file' => 'web-mau-doanh-nghiep-full.png', 'width' => 1440, 'height' => 1100, 'title' => 'VPN Paper Box Manufacturer', 'tag' => 'Website doanh nghiệp', 'url' => 'https://hopgiayvpn.com/', 'domain' => 'hopgiayvpn.com' ),
+	array( 'file' => 'web-mau-spa-full.png', 'width' => 1440, 'height' => 1100, 'title' => 'Mộc An Spa', 'tag' => 'Website Spa', 'url' => 'http://spa.dichvuthietketrangweb.com/', 'domain' => 'spa.dichvuthietketrangweb.com' ),
+	array( 'file' => 'web-mau-mam-non-fixed.png', 'width' => 1440, 'height' => 1100, 'title' => 'Little Seed Montessori', 'tag' => 'Website Mầm non', 'url' => 'http://mamnon.dichvuthietketrangweb.com/', 'domain' => 'mamnon.dichvuthietketrangweb.com' ),
 );
 
 $reasons = array(
@@ -173,14 +171,16 @@ $faqs = array(
 
 	<section id="mau-website" class="hp-section hp-portfolio" aria-labelledby="portfolio-title">
 		<div class="hp-container">
-			<div class="hp-heading-row"><header class="hp-section-heading reveal-up"><p class="hp-eyebrow">Kho giao diện</p><h2 id="portfolio-title">Mẫu website tham khảo</h2><p>Đây là bộ giao diện mẫu do website sở hữu, dùng để trao đổi hướng bố cục. Không đại diện cho khách hàng hay dự án đã nghiệm thu.</p></header><div class="hp-carousel-controls"><button type="button" data-carousel-prev aria-label="Mẫu trước">←</button><button type="button" data-carousel-next aria-label="Mẫu tiếp theo">→</button></div></div>
+			<div class="hp-heading-row"><header class="hp-section-heading reveal-up"><p class="hp-eyebrow">Web mẫu đã triển khai</p><h2 id="portfolio-title">Mẫu website theo ngành nghề</h2><p>Khám phá các website mẫu hoàn chỉnh dành cho doanh nghiệp, spa và trường mầm non. Mỗi mẫu có thể tùy chỉnh nội dung, màu sắc và chức năng theo nhu cầu.</p></header><div class="hp-carousel-controls"><button type="button" data-carousel-prev aria-label="Mẫu trước">←</button><button type="button" data-carousel-next aria-label="Mẫu tiếp theo">→</button></div></div>
 			<div class="hp-carousel" data-carousel data-autoplay="5200">
 				<div class="hp-carousel-track" tabindex="0">
 					<?php foreach ( $portfolio as $item ) : ?>
 						<article class="hp-portfolio-card hp-slide">
-							<div class="hp-browser"><span></span><span></span><span></span><small>dichvuthietketrangweb.com/demo</small></div>
-							<div class="hp-screenshot"><img src="<?php echo esc_url( $asset( 'templates/business/' . $item['file'] ) ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>" width="<?php echo esc_attr( $item['width'] ); ?>" height="<?php echo esc_attr( $item['height'] ); ?>" loading="lazy" decoding="async"></div>
-							<div class="hp-portfolio-meta"><span><?php echo esc_html( $item['tag'] ); ?></span><h3><?php echo esc_html( $item['title'] ); ?></h3></div>
+							<div class="hp-browser"><span></span><span></span><span></span><small><?php echo esc_html( $item['domain'] ); ?></small></div>
+							<a class="hp-portfolio-link" href="<?php echo esc_url( $item['url'] ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Xem website <?php echo esc_attr( $item['title'] ); ?>">
+								<div class="hp-screenshot"><img src="<?php echo esc_url( $asset( $item['file'] ) ); ?>" alt="Ảnh đại diện <?php echo esc_attr( $item['title'] ); ?>" width="<?php echo esc_attr( $item['width'] ); ?>" height="<?php echo esc_attr( $item['height'] ); ?>" loading="lazy" decoding="async"></div>
+								<div class="hp-portfolio-meta"><span><?php echo esc_html( $item['tag'] ); ?></span><h3><?php echo esc_html( $item['title'] ); ?></h3><strong>Xem website <?php echo $icon( 'arrow' ); ?></strong></div>
+							</a>
 						</article>
 					<?php endforeach; ?>
 				</div>

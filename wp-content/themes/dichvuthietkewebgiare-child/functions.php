@@ -42,12 +42,12 @@ function dvtkwgr_child_assets() {
 		return;
 	}
 
-	$css_path = get_stylesheet_directory() . '/assets/css/homepage.min.css';
+	$css_path = get_stylesheet_directory() . '/assets/css/homepage.css';
 	$js_path  = get_stylesheet_directory() . '/assets/js/homepage.js';
 
 	wp_enqueue_style(
 		'dvtkwgr-homepage',
-		get_stylesheet_directory_uri() . '/assets/css/homepage.min.css',
+		get_stylesheet_directory_uri() . '/assets/css/homepage.css',
 		array( 'dvtkwgr-main' ),
 		file_exists( $css_path ) ? (string) filemtime( $css_path ) : DVTKWGR_CHILD_VERSION
 	);
